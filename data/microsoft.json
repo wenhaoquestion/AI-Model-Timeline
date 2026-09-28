@@ -1,0 +1,23 @@
+[
+  {"lane": "早期 Turing/Orca", "m": "Turing-NLG", "d": "2020-02-10", "t": "flagship", "n": "17B,当时最大"},
+  {"lane": "早期 Turing/Orca", "m": "Megatron-Turing NLG", "d": "2021-10-11", "t": "flagship", "n": "530B,与 NVIDIA 合作"},
+  {"lane": "早期 Turing/Orca", "m": "Orca 2", "d": "2023-11-20", "t": "open", "n": "小模型推理"},
+  {"lane": "Phi 小模型", "m": "Phi-1", "d": "2023-06-20", "t": "small", "n": "1.3B 代码模型"},
+  {"lane": "Phi 小模型", "m": "Phi-1.5", "d": "2023-09-11", "t": "small", "n": "1.3B 通用"},
+  {"lane": "Phi 小模型", "m": "Phi-2", "d": "2023-12-12", "t": "small", "n": "2.7B"},
+  {"lane": "Phi 小模型", "m": "Phi-3", "d": "2024-04-23", "t": "small", "n": "mini 3.8B"},
+  {"lane": "Phi 小模型", "m": "Phi-3.5", "d": "2024-08-20", "t": "small", "n": "含 MoE/Vision"},
+  {"lane": "Phi 小模型", "m": "Phi-4", "d": "2024-12-12", "t": "small", "n": "14B"},
+  {"lane": "Phi 小模型", "m": "Phi-4-mini / multimodal", "d": "2025-02-26", "t": "small", "n": "语音+视觉"},
+  {"lane": "Phi 推理", "m": "Phi-4-reasoning", "d": "2025-04-30", "t": "reasoning", "n": "14B 推理,含 plus"},
+  {"lane": "Phi 推理", "m": "Phi-4-mini-flash-reasoning", "d": "2025-07-09", "t": "reasoning", "n": "混合架构,端侧"},
+  {"lane": "Phi 推理", "m": "Phi-4-reasoning-vision-15B", "d": "2026-03-04", "t": "reasoning", "n": "自适应视觉推理"},
+  {"lane": "MAI 文本/推理", "m": "MAI-1-preview", "d": "2025-08-28", "t": "flagship", "n": "首个自研基础模型"},
+  {"lane": "MAI 文本/推理", "m": "MAI-Thinking-1", "d": "2026-06-02", "t": "reasoning", "n": "首个推理,同发 Code-1-Flash"},
+  {"lane": "MAI 图像", "m": "MAI-Image-1", "d": "2025-10-13", "t": "media", "n": "首个自研生图"},
+  {"lane": "MAI 图像", "m": "MAI-Image-2", "d": "2026-04-02", "t": "media", "n": "Foundry 上线"},
+  {"lane": "MAI 图像", "m": "MAI-Image-2.5", "d": "2026-06-02", "t": "media", "n": "图生图编辑,Build 2026"},
+  {"lane": "MAI 语音", "m": "MAI-Voice-1", "d": "2025-08-28", "t": "media", "n": "自研语音合成"},
+  {"lane": "MAI 语音", "m": "MAI-Transcribe-1", "d": "2026-04-02", "t": "media", "n": "语音转写"},
+  {"lane": "MAI 语音", "m": "MAI-Voice-2", "d": "2026-06-02", "t": "media", "n": "15 种语言,含 Flash"}
+]

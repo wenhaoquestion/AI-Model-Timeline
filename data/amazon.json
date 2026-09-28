@@ -1,0 +1,15 @@
+[
+  {"lane": "Titan 文本", "m": "Amazon Titan", "d": "2023-04-13", "t": "flagship", "n": "随 Bedrock 预览发布"},
+  {"lane": "Titan 文本", "m": "Titan Text Premier", "d": "2024-05-07", "t": "flagship", "n": "Titan 旗舰文本"},
+  {"lane": "Nova 主力", "m": "Nova Micro / Lite / Pro", "d": "2024-12-03", "t": "flagship", "n": "首代 Nova,re:Invent"},
+  {"lane": "Nova 主力", "m": "Nova Premier", "d": "2025-04-30", "t": "flagship", "n": "最强 Nova 1,26/9/14 退役"},
+  {"lane": "Nova 主力", "m": "Nova 2 Lite / Pro / Omni", "d": "2025-12-02", "t": "reasoning", "n": "可调思考,Pro/Omni 预览"},
+  {"lane": "语音/智能体 (Sonic, Act)", "m": "Nova Act (preview)", "d": "2025-03-31", "t": "code", "n": "浏览器智能体研究预览"},
+  {"lane": "语音/智能体 (Sonic, Act)", "m": "Nova Sonic", "d": "2025-04-08", "t": "media", "n": "语音到语音"},
+  {"lane": "语音/智能体 (Sonic, Act)", "m": "Nova 2 Sonic", "d": "2025-12-02", "t": "media", "n": "二代语音模型"},
+  {"lane": "图像 (Titan Image, Canvas)", "m": "Titan Image Generator", "d": "2023-11-29", "t": "media", "n": "带隐形水印"},
+  {"lane": "图像 (Titan Image, Canvas)", "m": "Titan Image Generator v2", "d": "2024-08-06", "t": "media", "n": "参考图条件控制"},
+  {"lane": "图像 (Titan Image, Canvas)", "m": "Nova Canvas", "d": "2024-12-03", "t": "media", "n": "Nova 生图", "end": "2026-09-30"},
+  {"lane": "视频 (Reel)", "m": "Nova Reel", "d": "2024-12-03", "t": "media", "n": "6 秒视频生成"},
+  {"lane": "视频 (Reel)", "m": "Nova Reel 1.1", "d": "2025-04-07", "t": "media", "n": "2 分钟多镜头", "end": "2026-09-30"}
+]

@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>大模型编年图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root {
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --surface-2: #f8f9fa;
+  --ink: #0f1419;
+  --ink-2: #4a5260;
+  --muted: #7f8793;
+  --grid: #e6e8ec;
+  --grid-strong: #cfd3da;
+  --ring: rgba(15, 20, 25, 0.10);
+  --today: #d03b3b;
+  --t-flagship: #2a78d6;
+  --t-reasoning: #eb6834;
+  --t-small: #1baf7a;
+  --t-open: #eda100;
+  --t-media: #e87ba4;
+  --t-code: #008300;
+  --fill: 26%;
+  --fill-hover: 46%;
+  --label-w: 168px;
+  --lane-h: 26px;
+  --sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0d0f12;
+    --surface: #15181d;
+    --surface-2: #1b1f25;
+    --ink: #f2f4f7;
+    --ink-2: #b6bdc8;
+    --muted: #7d8591;
+    --grid: #22262d;
+    --grid-strong: #343a44;
+    --ring: rgba(255, 255, 255, 0.10);
+    --today: #e66767;
+    --t-flagship: #3987e5;
+    --t-reasoning: #d95926;
+    --t-small: #199e70;
+    --t-open: #c98500;
+    --t-media: #d55181;
+    --t-code: #008300;
+    --fill: 34%;
+    --fill-hover: 58%;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d0f12;
+  --surface: #15181d;
+  --surface-2: #1b1f25;
+  --ink: #f2f4f7;
+  --ink-2: #b6bdc8;
+  --muted: #7d8591;
+  --grid: #22262d;
+  --grid-strong: #343a44;
+  --ring: rgba(255, 255, 255, 0.10);
+  --today: #e66767;
+  --t-flagship: #3987e5;
+  --t-reasoning: #d95926;
+  --t-small: #199e70;
+  --t-open: #c98500;
+  --t-media: #d55181;
+  --t-code: #008300;
+  --fill: 34%;
+  --fill-hover: 58%;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+html { color-scheme: light; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.page {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding-block: 28px 56px;
+  padding-inline: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- header ---------- */
+header.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 32px;
+  align-items: end;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  margin: 2px 0 6px;
+  font-size: clamp(30px, 4.4vw, 46px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.lede {
+  margin: 0;
+  max-width: 64ch;
+  color: var(--ink-2);
+}
+.stats {
+  display: flex;
+  gap: 28px;
+  font-family: var(--mono);
+}
+.stat { display: flex; flex-direction: column; }
+.stat b { font-size: 26px; font-weight: 600; line-height: 1.1; color: var(--ink); }
+.stat span { font-size: 11px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+
+/* ---------- controls ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+}
+.group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.group-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-right: 2px;
+}
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--grid-strong);
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.seg button {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 11px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--grid-strong); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.seg button:hover:not([aria-pressed="true"]) { background: var(--surface-2); color: var(--ink); }
+.search {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 10px;
+  width: 190px;
+  max-width: 100%;
+  border: 1px solid var(--grid-strong);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.search::placeholder { color: var(--muted); }
+button:focus-visible, input:focus-visible, .bar:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--t-flagship);
+  outline-offset: 2px;
+}
+
+/* legend doubles as the type filter */
+.legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: inherit;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--grid-strong);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+.chip .sw {
+  width: 16px; height: 10px; border-radius: 2px;
+  background: color-mix(in oklab, var(--c) var(--fill-hover), var(--surface));
+  border-left: 3px solid var(--c);
+}
+.chip .n { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.chip[aria-pressed="false"] { color: var(--muted); border-style: dashed; }
+.chip[aria-pressed="false"] .sw { background: transparent; border: 1px dashed var(--muted); }
+
+/* ---------- timeline ---------- */
+.frame {
+  background: var(--surface);
+  border: 1px solid var(--ring);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.tl {
+  position: relative;
+  overflow: auto;
+  max-height: min(78vh, 1400px);
+  overscroll-behavior-x: contain;
+}
+.tl-inner { position: relative; }
+
+.axis {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  background: var(--surface);
+  border-bottom: 1px solid var(--grid-strong);
+}
+.corner {
+  position: sticky;
+  left: 0;
+  z-index: 7;
+  flex: 0 0 var(--label-w);
+  width: var(--label-w);
+  background: var(--surface);
+  border-right: 1px solid var(--grid-strong);
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: flex-end;
+}
+.axis-track { position: relative; height: 46px; flex: 0 0 auto; }
+.tick { position: absolute; top: 0; bottom: 0; }
+.tick.year { border-left: 1px solid var(--grid-strong); }
+.tick.year span {
+  position: absolute; top: 5px; left: 6px;
+  font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink);
+}
+.tick.month { top: 28px; border-left: 1px solid var(--grid); }
+.tick.month span {
+  position: absolute; top: 1px; left: 4px;
+  font-family: var(--mono); font-size: 10.5px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.axis-today {
+  position: absolute; top: 4px;
+  transform: translateX(-50%);
+  font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+  color: var(--surface); background: var(--today);
+  padding: 0 5px; border-radius: 3px; white-space: nowrap;
+}
+.hover-chip {
+  position: absolute; bottom: 2px;
+  transform: translateX(-50%);
+  font-family: var(--mono); font-size: 10.5px;
+  background: var(--ink); color: var(--surface);
+  padding: 0 5px; border-radius: 3px; white-space: nowrap;
+  pointer-events: none;
+}
+
+.body { position: relative; }
+.gridlayer {
+  position: absolute; top: 0; bottom: 0;
+  left: var(--label-w);
+  pointer-events: none;
+  z-index: 0;
+}
+.gl { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--grid); }
+.gl.year { border-left-color: var(--grid-strong); }
+.gl.today { border-left: 2px solid var(--today); opacity: 0.7; }
+.gl.hover { border-left: 1px dashed var(--ink-2); opacity: 0.6; }
+
+.co { position: relative; z-index: 1; border-bottom: 1px solid var(--grid-strong); }
+.co:last-child { border-bottom: 0; }
+.co-head { display: flex; }
+.co-name {
+  position: sticky; left: 0; z-index: 3;
+  flex: 0 0 var(--label-w); width: var(--label-w);
+  background: var(--surface-2);
+  border-right: 1px solid var(--grid-strong);
+  padding: 7px 12px 5px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.co-name strong { font-size: 14.5px; font-weight: 700; line-height: 1.25; }
+.co-name small { font-size: 11px; color: var(--muted); line-height: 1.3; }
+.co-name .rg {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em;
+  color: var(--ink-2); border: 1px solid var(--grid-strong);
+  border-radius: 3px; padding: 0 4px; margin-left: 6px; vertical-align: 1px;
+}
+.co-strip { flex: 0 0 auto; background: color-mix(in oklab, var(--surface-2) 55%, transparent); }
+
+.lane { display: flex; height: var(--lane-h); }
+.lane-label {
+  position: sticky; left: 0; z-index: 3;
+  flex: 0 0 var(--label-w); width: var(--label-w);
+  background: var(--surface);
+  border-right: 1px solid var(--grid-strong);
+  padding: 0 12px 0 22px;
+  font-size: 12px; color: var(--ink-2);
+  display: flex; align-items: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lane-track { position: relative; flex: 0 0 auto; }
+
+.bar {
+  position: absolute; top: 3px;
+  height: calc(var(--lane-h) - 6px);
+  border-radius: 2px 4px 4px 2px;
+  background: color-mix(in oklab, var(--c) var(--fill), var(--surface));
+  border-left: 3px solid var(--c);
+  color: var(--ink);
+  font-size: 11.5px; font-weight: 500;
+  line-height: calc(var(--lane-h) - 6px);
+  padding: 0 5px 0 4px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  cursor: default;
+  transition: background-color 120ms, opacity 120ms;
+}
+.bar.ongoing {
+  border-radius: 2px 0 0 2px;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 18px), rgba(0,0,0,0.35));
+          mask-image: linear-gradient(90deg, #000 calc(100% - 18px), rgba(0,0,0,0.35));
+}
+.bar.tiny { color: transparent; padding: 0; }
+.bar:hover, .bar:focus-visible, .bar.hl {
+  background: color-mix(in oklab, var(--c) var(--fill-hover), var(--surface));
+  z-index: 2;
+}
+.bar.dim { opacity: 0.13; }
+
+.tooltip {
+  position: fixed; z-index: 50;
+  pointer-events: none;
+  max-width: 300px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--grid-strong);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.16);
+  padding: 10px 12px;
+  font-size: 12.5px;
+}
+.tooltip .tt-m { font-size: 15px; font-weight: 700; line-height: 1.3; }
+.tooltip .tt-sub { color: var(--muted); font-size: 12px; display: flex; align-items: center; gap: 6px; margin-top: 1px; }
+.tooltip .key { width: 14px; height: 3px; border-radius: 2px; background: var(--c); }
+.tooltip dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 8px 0 0; }
+.tooltip dt { color: var(--muted); }
+.tooltip dd { margin: 0; font-family: var(--mono); font-size: 12px; }
+.tooltip dd.big { font-weight: 600; color: var(--ink); }
+.tooltip .tt-n { margin-top: 7px; color: var(--ink-2); }
+
+.foot-note {
+  font-size: 12px; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+}
+.foot-note kbd {
+  font-family: var(--mono); font-size: 11px;
+  border: 1px solid var(--grid-strong); border-bottom-width: 2px;
+  border-radius: 4px; padding: 0 4px; color: var(--ink-2);
+}
+
+/* ---------- export ---------- */
+.export { margin-left: auto; position: relative; }
+.btn-primary {
+  font: inherit; font-size: 13px; font-weight: 500;
+  padding: 5px 14px;
+  border: 1px solid var(--ink);
+  border-radius: 7px;
+  background: var(--ink); color: var(--surface);
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--ink-2); border-color: var(--ink-2); }
+.btn-primary:disabled { opacity: 0.5; cursor: progress; }
+.exp-panel {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 20;
+  width: min(340px, calc(100vw - 32px));
+  background: var(--surface);
+  border: 1px solid var(--grid-strong);
+  border-radius: 10px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.exp-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.exp-row .group-label { width: 28px; }
+.exp-hint { margin: 0; font-size: 12px; line-height: 1.6; color: var(--ink-2); }
+.exp-panel .btn-primary { align-self: flex-start; padding: 7px 16px; }
+.exp-status { margin: 0; font-size: 12px; color: var(--ink-2); min-height: 1em; }
+.exp-status:empty { display: none; }
+@media (max-width: 720px) {
+  .export { margin-left: 0; }
+  .exp-panel { left: 0; right: auto; }
+}
+
+/* ---------- table view ---------- */
+details.table-view {
+  background: var(--surface);
+  border: 1px solid var(--ring);
+  border-radius: 10px;
+}
+details.table-view summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 700;
+}
+details.table-view summary span { font-family: var(--mono); font-weight: 400; color: var(--muted); font-size: 12px; margin-left: 6px; }
+.table-wrap { overflow-x: auto; max-height: 70vh; overflow-y: auto; border-top: 1px solid var(--grid); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 6px 12px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--surface-2); font-weight: 500; color: var(--ink-2); font-size: 12px; z-index: 1; }
+td.num, td.date { font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+td.note { white-space: normal; min-width: 200px; color: var(--ink-2); }
+td .tp { display: inline-flex; align-items: center; gap: 6px; }
+td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); display: inline-block; }
+
+@media (max-width: 720px) {
+  :root { --label-w: 108px; --lane-h: 24px; }
+  .page { padding-inline: 16px; padding-block: 20px 40px; }
+  header.top { grid-template-columns: 1fr; }
+  .stats { gap: 18px; }
+  .stat b { font-size: 20px; }
+  .lane-label { padding-left: 10px; font-size: 11px; }
+  .co-name { padding-inline: 8px; }
+  .co-name .rg { display: none; }
+  .corner { padding-inline: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="top">
+    <div>
+      <div class="eyebrow">AI Model Timeline · 2018 — <span id="yr-end">2026</span></div>
+      <h1>大模型编年图</h1>
+      <p class="lede">横轴是时间，纵轴是公司。每家公司按产品系列拆成多条轨道，每一格是一个模型：从它发布那天开始，到同系列下一代发布为止。最右端渐隐的格子表示该系列目前的最新版本。</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="group">
+      <span class="group-label">视图</span>
+      <div class="seg" id="presets">
+        <button type="button" data-p="all">全景</button>
+        <button type="button" data-p="2023">2023 起</button>
+        <button type="button" data-p="18m">近 18 个月</button>
+      </div>
+      <div class="seg" id="zoom">
+        <button type="button" data-z="out" aria-label="缩小">−</button>
+        <button type="button" data-z="in" aria-label="放大">＋</button>
+      </div>
+    </div>
+    <div class="group">
+      <span class="group-label">地区</span>
+      <div class="seg" id="region">
+        <button type="button" data-r="all" aria-pressed="true">全部</button>
+        <button type="button" data-r="intl" aria-pressed="false">海外</button>
+        <button type="button" data-r="cn" aria-pressed="false">中国</button>
+      </div>
+    </div>
+    <div class="group">
+      <label class="group-label" for="q">搜索</label>
+      <input class="search" id="q" type="search" placeholder="例如 GPT-4、R1、Qwen" autocomplete="off">
+    </div>
+    <div class="group export">
+      <button type="button" class="btn-primary" id="exp-btn" aria-expanded="false" aria-controls="exp-panel">导出图片</button>
+      <div class="exp-panel" id="exp-panel" hidden>
+        <div class="exp-row">
+          <span class="group-label">范围</span>
+          <div class="seg" id="exp-range">
+            <button type="button" data-v="all" aria-pressed="true">完整 2018–<span id="yr-end2">2026</span></button>
+            <button type="button" data-v="view" aria-pressed="false">当前视图</button>
+          </div>
+        </div>
+        <div class="exp-row">
+          <span class="group-label">格式</span>
+          <div class="seg" id="exp-fmt">
+            <button type="button" data-v="png" aria-pressed="true">PNG 图片</button>
+            <button type="button" data-v="svg" aria-pressed="false">SVG 矢量</button>
+          </div>
+        </div>
+        <p class="exp-hint" id="exp-hint">导出的是完整大图：所有公司和系列全部展开，时间轴按每天 5 像素绘制，模型名尽量完整显示。按当前的地区、类型和搜索条件导出，配色跟随当前主题。SVG 可以无限放大。</p>
+        <button type="button" class="btn-primary" id="exp-go">生成并保存</button>
+        <p class="exp-status" id="exp-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="group">
+      <span class="group-label">类型</span>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="tl" id="tl">
+      <div class="tl-inner" id="inner">
+        <div class="axis">
+          <div class="corner">公司 / 系列</div>
+          <div class="axis-track" id="axis"></div>
+        </div>
+        <div class="body" id="body">
+          <div class="gridlayer" id="grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot-note">
+    <span>数据截至 <b id="asof"></b>，按公开发布（或首次开放使用）日期计。</span>
+    <span>格子长度 = 在该系列中作为最新版的时长，不代表模型下线。</span>
+    <span>缩放：<kbd>Ctrl</kbd> + 滚轮，或上方 ＋ / − 按钮。</span>
+  </div>
+
+  <details class="table-view" id="tv">
+    <summary>全部模型列表<span id="tv-count"></span></summary>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>发布日期</th><th>公司</th><th>系列</th><th>模型</th><th>类型</th><th>在位天数</th><th>下一代</th><th>备注</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<div class="tooltip" id="tip" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+  // filled in by build.py from data/<company>.json
+  var DATA = /*DATA*/[];
+  var TODAY_STR = /*AS_OF*/"2026-09-28";
+
+  // filled in by build.py from data/companies.json (order = row order)
+  var COMPANIES = /*COMPANIES*/[];
+  var TYPES = [
+    { k: "flagship",  name: "旗舰 / 通用" },
+    { k: "reasoning", name: "推理" },
+    { k: "small",     name: "轻量 / 快速" },
+    { k: "open",      name: "开源权重" },
+    { k: "media",     name: "图像 / 视频 / 语音" },
+    { k: "code",      name: "代码 / 专项" }
+  ];
+  var TYPE_NAME = {};
+  TYPES.forEach(function (t) { TYPE_NAME[t.k] = t.name; });
+  var CO = {};
+  COMPANIES.forEach(function (c) { CO[c.k] = c; });
+
+  var DAY = 864e5;
+  function parse(s) {
+    var p = String(s).split("-").map(Number);
+    return Date.UTC(p[0], (p[1] || 1) - 1, p[2] || 1);
+  }
+  function fmt(ms) {
+    var d = new Date(ms);
+    return d.getUTCFullYear() + "-" + String(d.getUTCMonth() + 1).padStart(2, "0") + "-" + String(d.getUTCDate()).padStart(2, "0");
+  }
+  function fmtShort(ms) {
+    var d = new Date(ms);
+    return d.getUTCFullYear() + "." + String(d.getUTCMonth() + 1).padStart(2, "0");
+  }
+  var T0 = Date.UTC(2018, 0, 1);
+  var TODAY = parse(TODAY_STR);
+  var END_YEAR = new Date(TODAY).getUTCFullYear();
+  var T1 = Date.UTC(END_YEAR + 1, 0, 1);
+  // right edge of the "full" views: about two months past today
+  var T_END = Math.min(T1, TODAY + 64 * DAY);
+  document.getElementById("yr-end").textContent = END_YEAR;
+  document.getElementById("yr-end2").textContent = END_YEAR;
+  var SPAN = (T1 - T0) / DAY;
+  function dayOf(ms) { return (ms - T0) / DAY; }
+
+  // ---------- model the data ----------
+  var items = DATA.filter(function (x) { return CO[x.c] && x.d && parse(x.d) >= T0; }).map(function (x, i) {
+    return { id: i, c: x.c, lane: x.lane || "其他", m: x.m, t: TYPE_NAME[x.t] ? x.t : "flagship", s: parse(x.d), ds: x.d, n: x.n || "", endExplicit: x.end ? parse(x.end) : null };
+  });
+
+  var byCo = {};
+  items.forEach(function (it) {
+    (byCo[it.c] = byCo[it.c] || {});
+    (byCo[it.c][it.lane] = byCo[it.c][it.lane] || []).push(it);
+  });
+  var structure = COMPANIES.filter(function (c) { return byCo[c.k]; }).map(function (c) {
+    var lanes = Object.keys(byCo[c.k]).map(function (ln) {
+      var list = byCo[c.k][ln].sort(function (a, b) { return a.s - b.s || a.id - b.id; });
+      list.forEach(function (it, i) {
+        var nx = list[i + 1];
+        // successor on the same day (a paired launch) doesn't end the bar; find the next later one
+        var j = i + 1;
+        while (list[j] && list[j].s <= it.s) j++;
+        nx = list[j];
+        it.next = nx || null;
+        if (it.endExplicit) { it.e = it.endExplicit; it.ongoing = false; }
+        else if (nx) { it.e = nx.s; it.ongoing = false; }
+        else { it.e = TODAY; it.ongoing = true; }
+        it.days = Math.max(1, Math.round((it.e - it.s) / DAY));
+      });
+      return { name: ln, items: list, first: list[0].s };
+    }).sort(function (a, b) { return a.first - b.first; });
+    return { co: c, lanes: lanes };
+  });
+
+  // same-day siblings in one lane would overlap: stack them by splitting the lane into sub-rows
+  structure.forEach(function (g) {
+    var out = [];
+    g.lanes.forEach(function (ln) {
+      var rows = [];
+      ln.items.forEach(function (it) {
+        var placed = false;
+        for (var r = 0; r < rows.length; r++) {
+          var last = rows[r][rows[r].length - 1];
+          if (last.e <= it.s) { rows[r].push(it); placed = true; break; }
+        }
+        if (!placed) rows.push([it]);
+      });
+      rows.forEach(function (row, ri) {
+        out.push({ name: ri === 0 ? ln.name : "", lane: ln.name, items: row });
+      });
+    });
+    g.rows = out;
+  });
+
+  // ---------- state ----------
+  var state = { ppd: 1, region: "all", types: {}, q: "" };
+  TYPES.forEach(function (t) { state.types[t.k] = true; });
+  try {
+    var saved = JSON.parse(localStorage.getItem("llm-timeline-v1") || "null");
+    if (saved && saved.region) state.region = saved.region;
+    if (saved && saved.types) TYPES.forEach(function (t) { if (saved.types[t.k] === false) state.types[t.k] = false; });
+  } catch (e) {}
+  function persist() {
+    try { localStorage.setItem("llm-timeline-v1", JSON.stringify({ region: state.region, types: state.types })); } catch (e) {}
+  }
+
+  var $ = function (id) { return document.getElementById(id); };
+  var tl = $("tl"), inner = $("inner"), axis = $("axis"), body = $("body"), grid = $("grid"), tip = $("tip");
+  $("asof").textContent = TODAY_STR;
+
+  function labelW() {
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--label-w")) || 168;
+  }
+
+  // ---------- stats ----------
+  (function () {
+    var years = {};
+    items.forEach(function (it) { var y = new Date(it.s).getUTCFullYear(); years[y] = (years[y] || 0) + 1; });
+    var peak = Object.keys(years).sort(function (a, b) { return years[b] - years[a]; })[0];
+    var s = $("stats");
+    [[items.length, "个模型"], [structure.length, "家公司"], [peak ? peak : "—", "发布最密集 · " + (years[peak] || 0) + " 个"]].forEach(function (p) {
+      var d = document.createElement("div"); d.className = "stat";
+      var b = document.createElement("b"); b.textContent = p[0];
+      var sp = document.createElement("span"); sp.textContent = p[1];
+      d.appendChild(b); d.appendChild(sp); s.appendChild(d);
+    });
+  })();
+
+  // ---------- legend / type filter ----------
+  var legend = $("legend");
+  var typeCount = {};
+  items.forEach(function (it) { typeCount[it.t] = (typeCount[it.t] || 0) + 1; });
+  TYPES.forEach(function (t) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.dataset.t = t.k;
+    b.style.setProperty("--c", "var(--t-" + t.k + ")");
+    b.setAttribute("aria-pressed", String(state.types[t.k]));
+    var sw = document.createElement("i"); sw.className = "sw";
+    var nm = document.createElement("span"); nm.textContent = t.name;
+    var n = document.createElement("span"); n.className = "n"; n.textContent = typeCount[t.k] || 0;
+    b.appendChild(sw); b.appendChild(nm); b.appendChild(n);
+    b.addEventListener("click", function () {
+      state.types[t.k] = !state.types[t.k];
+      if (!TYPES.some(function (x) { return state.types[x.k]; })) {
+        TYPES.forEach(function (x) { state.types[x.k] = true; });
+      }
+      legend.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", String(state.types[c.dataset.t])); });
+      persist(); applyFilters();
+    });
+    legend.appendChild(b);
+  });
+
+  // ---------- build timeline DOM ----------
+  var bars = [];
+  var coEls = [];
+  var tracks = [];
+  structure.forEach(function (g) {
+    var co = document.createElement("section"); co.className = "co"; co.dataset.cn = g.co.cn ? "1" : "0";
+    var head = document.createElement("div"); head.className = "co-head";
+    var nm = document.createElement("div"); nm.className = "co-name";
+    var strong = document.createElement("strong"); strong.textContent = g.co.name;
+    var rg = document.createElement("span"); rg.className = "rg"; rg.textContent = g.co.rg; strong.appendChild(rg);
+    var small = document.createElement("small"); small.textContent = g.co.sub;
+    nm.appendChild(strong); nm.appendChild(small);
+    var strip = document.createElement("div"); strip.className = "co-strip"; tracks.push(strip);
+    head.appendChild(nm); head.appendChild(strip); co.appendChild(head);
+
+    g.rows.forEach(function (row) {
+      var lane = document.createElement("div"); lane.className = "lane";
+      var ll = document.createElement("div"); ll.className = "lane-label"; ll.textContent = row.name; ll.title = row.name;
+      var tr = document.createElement("div"); tr.className = "lane-track"; tracks.push(tr);
+      row.items.forEach(function (it) {
+        var b = document.createElement("div");
+        b.className = "bar" + (it.ongoing ? " ongoing" : "");
+        b.tabIndex = 0;
+        b.textContent = it.m;
+        b.style.setProperty("--c", "var(--t-" + it.t + ")");
+        b.setAttribute("aria-label", g.co.name + " " + it.m + "，" + it.ds + " 发布，" + (it.ongoing ? "至今 " : "在位 ") + it.days + " 天");
+        b._it = it; it.el = b;
+        bars.push(b);
+        tr.appendChild(b);
+      });
+      lane.appendChild(ll); lane.appendChild(tr); co.appendChild(lane);
+    });
+    body.appendChild(co);
+    coEls.push(co);
+  });
+
+  // ---------- layout (depends on zoom) ----------
+  var hoverLine = document.createElement("div"); hoverLine.className = "gl hover"; hoverLine.hidden = true;
+  var hoverChip = document.createElement("div"); hoverChip.className = "hover-chip"; hoverChip.hidden = true;
+
+  function layout() {
+    var ppd = state.ppd;
+    var W = Math.round(SPAN * ppd);
+    var lw = labelW();
+    inner.style.width = (lw + W) + "px";
+    axis.style.width = W + "px";
+    tracks.forEach(function (t) { t.style.width = W + "px"; });
+    grid.style.width = W + "px";
+
+    bars.forEach(function (b) {
+      var it = b._it;
+      var x = dayOf(it.s) * ppd;
+      var w = Math.max(3, (it.e - it.s) / DAY * ppd - 2); // 2px surface gap before the successor
+      b._x = x; b._w = w;
+      b.style.left = x + "px";
+      b.style.width = w + "px";
+      b.classList.toggle("tiny", w < 26);
+    });
+
+    // axis + gridlines
+    axis.textContent = ""; grid.textContent = "";
+    var monthPx = 30.4 * ppd;
+    var step = monthPx >= 26 ? 1 : monthPx >= 11 ? 3 : monthPx >= 5 ? 6 : 0;
+    for (var y = 2018; y <= END_YEAR; y++) {
+      for (var m = 0; m < 12; m++) {
+        var ms = Date.UTC(y, m, 1);
+        var x = dayOf(ms) * ppd;
+        if (m === 0) {
+          var t = document.createElement("div"); t.className = "tick year"; t.style.left = x + "px";
+          var sp = document.createElement("span"); sp.textContent = y; t.appendChild(sp); axis.appendChild(t);
+          var g = document.createElement("div"); g.className = "gl year"; g.style.left = x + "px"; grid.appendChild(g);
+        } else if (step && m % step === 0) {
+          var tm = document.createElement("div"); tm.className = "tick month"; tm.style.left = x + "px";
+          var sm = document.createElement("span"); sm.textContent = (m + 1) + (monthPx >= 40 ? "月" : ""); tm.appendChild(sm); axis.appendChild(tm);
+          var gm = document.createElement("div"); gm.className = "gl"; gm.style.left = x + "px"; grid.appendChild(gm);
+        }
+      }
+    }
+    var tx = dayOf(TODAY) * ppd;
+    var gt = document.createElement("div"); gt.className = "gl today"; gt.style.left = tx + "px"; grid.appendChild(gt);
+    var at = document.createElement("div"); at.className = "axis-today"; at.style.left = tx + "px"; at.textContent = "今天"; axis.appendChild(at);
+    grid.appendChild(hoverLine); axis.appendChild(hoverChip);
+    pinLabels();
+  }
+
+  // bars that begin left of the viewport keep their name readable at the visible edge
+  function pinLabels() {
+    var sl = tl.scrollLeft;
+    bars.forEach(function (b) {
+      var ind = (b._x < sl && b._x + b._w > sl) ? Math.min(sl - b._x, b._w - 60) : 0;
+      b.style.textIndent = ind > 0 ? ind + "px" : "";
+    });
+  }
+  var pinRaf = 0;
+  tl.addEventListener("scroll", function () {
+    if (pinRaf) return;
+    pinRaf = requestAnimationFrame(function () { pinRaf = 0; pinLabels(); });
+  }, { passive: true });
+
+  function trackW() { return tl.clientWidth - labelW(); }
+  function clampPpd(p) { return Math.min(14, Math.max(0.12, p)); }
+  function fit(fromMs, toMs) {
+    state.ppd = clampPpd(trackW() / ((toMs - fromMs) / DAY));
+    layout();
+    tl.scrollLeft = dayOf(fromMs) * state.ppd;
+    pinLabels();
+  }
+  function zoomAt(factor, anchorPx) {
+    var tw = trackW();
+    if (anchorPx == null) anchorPx = tw / 2;
+    var d = (tl.scrollLeft + anchorPx) / state.ppd;
+    state.ppd = clampPpd(state.ppd * factor);
+    layout();
+    tl.scrollLeft = d * state.ppd - anchorPx;
+    pinLabels();
+    markPreset(null);
+  }
+  function markPreset(p) {
+    $("presets").querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.p === p)); });
+  }
+  var PRESETS = {
+    all: function () { fit(T0, T_END); },
+    "2023": function () { fit(Date.UTC(2022, 10, 1), T_END); },
+    "18m": function () { fit(TODAY - 548 * DAY, TODAY + 40 * DAY); }
+  };
+  $("presets").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    PRESETS[b.dataset.p](); markPreset(b.dataset.p);
+  });
+  $("zoom").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    zoomAt(b.dataset.z === "in" ? 1.5 : 1 / 1.5);
+  });
+  tl.addEventListener("wheel", function (e) {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    var rect = tl.getBoundingClientRect();
+    var ax = e.clientX - rect.left - labelW();
+    if (ax < 0) ax = 0;
+    zoomAt(e.deltaY < 0 ? 1.2 : 1 / 1.2, ax);
+  }, { passive: false });
+
+  // ---------- filters ----------
+  function regionOk(isCn) {
+    return state.region === "all" || (state.region === "cn") === isCn;
+  }
+  function matchQ(it) {
+    if (!state.q) return true;
+    var q = state.q;
+    return it.m.toLowerCase().indexOf(q) >= 0 || it.lane.toLowerCase().indexOf(q) >= 0 || CO[it.c].name.toLowerCase().indexOf(q) >= 0 || CO[it.c].sub.toLowerCase().indexOf(q) >= 0;
+  }
+  function visible(it) { return state.types[it.t] && matchQ(it) && regionOk(CO[it.c].cn); }
+  function applyFilters() {
+    coEls.forEach(function (el) { el.hidden = !regionOk(el.dataset.cn === "1"); });
+    $("region").querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.r === state.region)); });
+    bars.forEach(function (b) {
+      var on = state.types[b._it.t] && matchQ(b._it);
+      b.classList.toggle("dim", !on);
+      b.tabIndex = on ? 0 : -1;
+    });
+    renderTable();
+  }
+  $("region").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    state.region = b.dataset.r; persist(); applyFilters();
+  });
+  var qTimer;
+  $("q").addEventListener("input", function (e) {
+    clearTimeout(qTimer);
+    var v = e.target.value.trim().toLowerCase();
+    qTimer = setTimeout(function () {
+      state.q = v; applyFilters();
+      if (v) {
+        var first = bars.filter(function (b) { return !b.classList.contains("dim") && !b.closest(".co").hidden; })
+          .sort(function (a, b2) { return a._it.s - b2._it.s; })[0];
+        if (first) {
+          var x = dayOf(first._it.s) * state.ppd;
+          if (x < tl.scrollLeft || x > tl.scrollLeft + trackW() - 60) tl.scrollLeft = x - 40;
+        }
+      }
+    }, 120);
+  });
+
+  // ---------- table ----------
+  function renderTable() {
+    var tb = $("tbody"); tb.textContent = "";
+    var rows = items.filter(visible).sort(function (a, b) { return b.s - a.s || a.c.localeCompare(b.c); });
+    $("tv-count").textContent = rows.length + " 条";
+    var frag = document.createDocumentFragment();
+    rows.forEach(function (it) {
+      var tr = document.createElement("tr");
+      function td(text, cls) { var c = document.createElement("td"); if (cls) c.className = cls; c.textContent = text; tr.appendChild(c); return c; }
+      td(it.ds, "date");
+      td(CO[it.c].name);
+      td(it.lane);
+      var m = td(it.m); m.style.fontWeight = "600";
+      var tc = document.createElement("td");
+      var tp = document.createElement("span"); tp.className = "tp"; tp.style.setProperty("--c", "var(--t-" + it.t + ")");
+      tp.appendChild(document.createElement("i"));
+      tp.appendChild(document.createTextNode(TYPE_NAME[it.t]));
+      tc.appendChild(tp); tr.appendChild(tc);
+      td(it.ongoing ? it.days + "（至今）" : String(it.days), "num");
+      td(it.next ? it.next.m : (it.ongoing ? "—" : "已停更"));
+      td(it.n, "note");
+      frag.appendChild(tr);
+    });
+    tb.appendChild(frag);
+  }
+
+  // ---------- tooltip ----------
+  function showTip(b, cx, cy) {
+    var it = b._it, co = CO[it.c];
+    tip.textContent = "";
+    tip.style.setProperty("--c", "var(--t-" + it.t + ")");
+    var m = document.createElement("div"); m.className = "tt-m"; m.textContent = it.m; tip.appendChild(m);
+    var sub = document.createElement("div"); sub.className = "tt-sub";
+    var key = document.createElement("i"); key.className = "key"; sub.appendChild(key);
+    sub.appendChild(document.createTextNode(co.name + " · " + it.lane + " · " + TYPE_NAME[it.t]));
+    tip.appendChild(sub);
+    var dl = document.createElement("dl");
+    function row(k, v, big) {
+      var dt = document.createElement("dt"); dt.textContent = k;
+      var dd = document.createElement("dd"); dd.textContent = v; if (big) dd.className = "big";
+      dl.appendChild(dt); dl.appendChild(dd);
+    }
+    row("发布", it.ds, true);
+    if (it.ongoing) row("状态", "当前最新 · 已 " + it.days + " 天", true);
+    else if (it.next) { row("接替", it.next.m + "（" + it.next.ds + "）"); row("在位", it.days + " 天", true); }
+    else { row("停更", fmt(it.e)); row("在位", it.days + " 天", true); }
+    tip.appendChild(dl);
+    if (it.n) { var n = document.createElement("div"); n.className = "tt-n"; n.textContent = it.n; tip.appendChild(n); }
+    tip.hidden = false;
+    var r = tip.getBoundingClientRect();
+    var x = cx + 14, y = cy + 16;
+    if (x + r.width > window.innerWidth - 8) x = cx - r.width - 14;
+    if (x < 8) x = 8;
+    if (y + r.height > window.innerHeight - 8) y = cy - r.height - 12;
+    if (y < 8) y = 8;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip() { tip.hidden = true; }
+  body.addEventListener("pointermove", function (e) {
+    var b = e.target.closest(".bar");
+    if (b && !b.classList.contains("dim")) showTip(b, e.clientX, e.clientY); else hideTip();
+  });
+  body.addEventListener("pointerleave", function () { hideTip(); hoverLine.hidden = true; hoverChip.hidden = true; });
+  body.addEventListener("focusin", function (e) {
+    var b = e.target.closest(".bar"); if (!b) return;
+    var r = b.getBoundingClientRect();
+    showTip(b, Math.max(r.left, tl.getBoundingClientRect().left + labelW()) + 8, r.bottom);
+  });
+  body.addEventListener("focusout", hideTip);
+  tl.addEventListener("scroll", hideTip, { passive: true });
+
+  // crosshair: vertical hairline + date chip that follows the pointer
+  inner.addEventListener("pointermove", function (e) {
+    var rect = inner.getBoundingClientRect();
+    var x = e.clientX - rect.left - labelW();
+    var tlr = tl.getBoundingClientRect();
+    if (x < 0 || e.clientX < tlr.left + labelW()) { hoverLine.hidden = true; hoverChip.hidden = true; return; }
+    hoverLine.hidden = false; hoverChip.hidden = false;
+    hoverLine.style.left = x + "px"; hoverChip.style.left = x + "px";
+    hoverChip.textContent = fmt(T0 + (x / state.ppd) * DAY);
+  });
+  inner.addEventListener("pointerleave", function () { hoverLine.hidden = true; hoverChip.hidden = true; });
+
+
+  // ---------- export: redraw the whole chart as a standalone image ----------
+  var downloadsP = (window.claude && typeof window.claude.use === "function")
+    ? window.claude.use("downloads").catch(function () { return null; })
+    : Promise.resolve(null);
+  var expBtn = $("exp-btn"), expPanel = $("exp-panel"), expGo = $("exp-go"), expStatus = $("exp-status");
+  var exp = { range: "all", fmt: "png" };
+  // On claude.ai the page saves through the viewer's confirmation dialog;
+  // opened as a local file it falls back to an ordinary browser download.
+  async function saveFile(filename, blob) {
+    var dl = await downloadsP;
+    if (dl) return dl.save({ filename: filename, data: blob });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+    return { status: "saved" };
+  }
+  function openPanel(open) {
+    expPanel.hidden = !open;
+    expBtn.setAttribute("aria-expanded", String(open));
+  }
+  expBtn.addEventListener("click", function () { openPanel(expPanel.hidden); });
+  document.addEventListener("pointerdown", function (e) {
+    if (!expPanel.hidden && !e.target.closest(".export")) openPanel(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !expPanel.hidden) { openPanel(false); expBtn.focus(); }
+  });
+  function segPick(id, key) {
+    $(id).addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      exp[key] = b.dataset.v;
+      $(id).querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    });
+  }
+  segPick("exp-range", "range");
+  segPick("exp-fmt", "fmt");
+
+  var SANS = '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
+  var MONO = '"IBM Plex Mono", ui-monospace, Menlo, monospace';
+  var mctx = document.createElement("canvas").getContext("2d");
+  function fontStr(o) { return (o.w || 400) + " " + o.s + "px " + (o.f === "mono" ? MONO : SANS); }
+  function fitText(txt, max, o) {
+    mctx.font = fontStr(o);
+    if (mctx.measureText(txt).width <= max) return txt;
+    var lo = 0, hi = txt.length;
+    while (lo < hi) {
+      var mid = (lo + hi + 1) >> 1;
+      if (mctx.measureText(txt.slice(0, mid) + "…").width <= max) lo = mid; else hi = mid - 1;
+    }
+    return lo > 0 ? txt.slice(0, lo) + "…" : "";
+  }
+  function hex(c) {
+    c = c.trim().replace("#", "");
+    if (c.length === 3) c = c.split("").map(function (x) { return x + x; }).join("");
+    return [parseInt(c.slice(0, 2), 16), parseInt(c.slice(2, 4), 16), parseInt(c.slice(4, 6), 16)];
+  }
+  function mix(a, b, p) {
+    var x = hex(a), y = hex(b);
+    return "rgb(" + x.map(function (v, i) { return Math.round(v * p + y[i] * (1 - p)); }).join(",") + ")";
+  }
+  function tokens() {
+    var cs = getComputedStyle(document.documentElement);
+    function g(n) { return cs.getPropertyValue(n).trim(); }
+    var t = {
+      bg: g("--bg"), surface: g("--surface"), surface2: g("--surface-2"), ink: g("--ink"), ink2: g("--ink-2"),
+      muted: g("--muted"), grid: g("--grid"), gridStrong: g("--grid-strong"), today: g("--today"),
+      fill: (parseFloat(g("--fill")) || 26) / 100, types: {}
+    };
+    TYPES.forEach(function (ty) { t.types[ty.k] = g("--t-" + ty.k); });
+    return t;
+  }
+
+  function buildScene(from, to, ppd) {
+    var tk = tokens();
+    var PAD = 48, LW = 250, AXH = 54, HEADH = 48, LANEH = 30, BARH = 23;
+    var W = Math.round((to - from) / DAY * ppd);
+    var X0 = PAD + LW;
+    var ops = [];
+    function rect(x, y, w, h, fill, r) { ops.push({ k: "r", x: x, y: y, w: w, h: h, fill: fill, r: r || 0 }); }
+    function text(x, y, t, o) { if (t) ops.push({ k: "t", x: x, y: y, t: t, s: o.s, w: o.w || 400, f: o.f || "sans", fill: o.fill }); }
+    function line(x1, y1, x2, y2, stroke, lw) { ops.push({ k: "l", x1: x1, y1: y1, x2: x2, y2: y2, stroke: stroke, lw: lw || 1 }); }
+
+    var groups = [], count = 0, typesUsed = {};
+    structure.forEach(function (g) {
+      if (!regionOk(g.co.cn)) return;
+      var rows = g.rows.map(function (r) {
+        return { lane: r.lane, items: r.items.filter(function (it) { return state.types[it.t] && matchQ(it) && it.e > from && it.s < to; }) };
+      }).filter(function (r) { return r.items.length; });
+      if (!rows.length) return;
+      rows.forEach(function (r) { count += r.items.length; r.items.forEach(function (it) { typesUsed[it.t] = 1; }); });
+      groups.push({ co: g.co, rows: rows });
+    });
+
+    var bodyH = 0;
+    groups.forEach(function (g) { bodyH += HEADH + g.rows.length * LANEH; });
+    var chartTop = PAD + 128;
+    var bodyTop = chartTop + AXH;
+    var chartBottom = bodyTop + bodyH;
+    var totalW = X0 + W + PAD;
+    var totalH = chartBottom + 64 + PAD;
+
+    rect(0, 0, totalW, totalH, tk.bg);
+    // title block
+    text(PAD, PAD + 36, "大模型编年图", { s: 36, w: 900, fill: tk.ink });
+    text(PAD, PAD + 66, count + " 个模型 · " + groups.length + " 家公司 · " + fmt(from) + " 至 " + fmt(to) + " · 数据截至 " + TODAY_STR, { s: 15, fill: tk.ink2 });
+    var lx = PAD;
+    TYPES.forEach(function (ty) {
+      if (!typesUsed[ty.k]) return;
+      var c = tk.types[ty.k];
+      rect(lx, PAD + 90, 22, 13, mix(c, tk.surface, 0.46), 2);
+      rect(lx, PAD + 90, 3, 13, c);
+      text(lx + 30, PAD + 101, ty.name, { s: 13, fill: tk.ink });
+      mctx.font = fontStr({ s: 13 });
+      lx += 30 + mctx.measureText(ty.name).width + 26;
+    });
+
+    // frame
+    rect(PAD, chartTop, LW + W, chartBottom - chartTop, tk.surface);
+
+    // company head bands (drawn under gridlines)
+    var y = bodyTop;
+    groups.forEach(function (g) {
+      rect(PAD, y, LW + W, HEADH, tk.surface2);
+      y += HEADH + g.rows.length * LANEH;
+    });
+
+    // axis + gridlines
+    var monthPx = 30.4 * ppd;
+    var d0 = new Date(from);
+    var yy = d0.getUTCFullYear(), mm = d0.getUTCMonth();
+    var firstYearX = null;
+    for (;;) {
+      var ms = Date.UTC(yy, mm, 1);
+      if (ms > to) break;
+      if (ms >= from) {
+        var x = X0 + (ms - from) / DAY * ppd;
+        if (mm === 0) {
+          line(x, chartTop, x, chartBottom, tk.gridStrong, 1);
+          text(x + 7, chartTop + 22, String(yy), { s: 15, w: 600, f: "mono", fill: tk.ink });
+          if (firstYearX === null) firstYearX = x;
+        } else if (monthPx >= 11) {
+          line(x, chartTop + 32, x, chartBottom, tk.grid, 1);
+          if (monthPx >= 22) text(x + 4, chartTop + 47, (mm + 1) + (monthPx >= 44 ? "月" : ""), { s: 11, f: "mono", fill: tk.muted });
+        }
+      }
+      mm++; if (mm > 11) { mm = 0; yy++; }
+    }
+    if (firstYearX === null || firstYearX - X0 > 70) {
+      text(X0 + 7, chartTop + 22, String(d0.getUTCFullYear()), { s: 15, w: 600, f: "mono", fill: tk.ink });
+    }
+    line(PAD, bodyTop, X0 + W, bodyTop, tk.gridStrong, 1);
+    text(PAD + 14, chartTop + 47, "公司 / 系列", { s: 12, fill: tk.muted });
+
+    // rows
+    y = bodyTop;
+    groups.forEach(function (g) {
+      text(PAD + 14, y + 22, g.co.name, { s: 17, w: 700, fill: tk.ink });
+      mctx.font = fontStr({ s: 17, w: 700 });
+      var nw = mctx.measureText(g.co.name).width;
+      text(PAD + 22 + nw, y + 21, g.co.rg, { s: 11, w: 600, f: "mono", fill: tk.ink2 });
+      text(PAD + 14, y + 40, fitText(g.co.sub, LW - 28, { s: 12 }), { s: 12, fill: tk.muted });
+      y += HEADH;
+      var lastLane = null;
+      g.rows.forEach(function (r) {
+        if (r.lane !== lastLane) text(PAD + 26, y + LANEH / 2 + 5, fitText(r.lane, LW - 40, { s: 13 }), { s: 13, fill: tk.ink2 });
+        lastLane = r.lane;
+        var by = y + (LANEH - BARH) / 2;
+        r.items.forEach(function (it) {
+          var s0 = Math.max(it.s, from), e0 = Math.min(it.e, to);
+          var bx = X0 + (s0 - from) / DAY * ppd;
+          var bw = Math.max(3, (e0 - s0) / DAY * ppd - 2);
+          var c = tk.types[it.t];
+          rect(bx, by, bw, BARH, mix(c, tk.surface, tk.fill), 3);
+          if (it.s >= from) rect(bx, by, 3, BARH, c);
+          if (bw >= 26) text(bx + 7, by + BARH / 2 + 4.5, fitText(it.m, bw - 11, { s: 12.5, w: 500 }), { s: 12.5, w: 500, fill: tk.ink });
+        });
+        y += LANEH;
+      });
+      line(PAD, y, X0 + W, y, tk.gridStrong, 1);
+    });
+
+    // today marker
+    if (TODAY >= from && TODAY <= to) {
+      var tx = X0 + (TODAY - from) / DAY * ppd;
+      rect(tx - 1, chartTop + 30, 2, chartBottom - chartTop - 30, tk.today);
+      rect(tx - 21, chartTop + 6, 42, 19, tk.today, 4);
+      text(tx - 14, chartTop + 20, "今天", { s: 12, w: 700, fill: tk.surface });
+    }
+    // label column divider + frame border
+    line(X0, chartTop, X0, chartBottom, tk.gridStrong, 1);
+    ops.push({ k: "b", x: PAD, y: chartTop, w: LW + W, h: chartBottom - chartTop, stroke: tk.gridStrong });
+
+    text(PAD, chartBottom + 30, "每一格表示一个模型从发布到同系列下一代发布的时长；延伸到“今天”红线的是该系列当前最新版本。格子长度不代表模型已下线。", { s: 13, fill: tk.ink2 });
+    text(PAD, chartBottom + 52, "日期按公开发布或首次开放使用计，整理于 " + TODAY_STR + "。", { s: 13, fill: tk.muted });
+
+    return { w: Math.ceil(totalW), h: Math.ceil(totalH), ops: ops, count: count };
+  }
+
+  function drawCanvas(sc, scale) {
+    var c = document.createElement("canvas");
+    c.width = Math.round(sc.w * scale); c.height = Math.round(sc.h * scale);
+    var ctx = c.getContext("2d");
+    if (!ctx) return null;
+    ctx.scale(scale, scale);
+    ctx.textBaseline = "alphabetic";
+    sc.ops.forEach(function (o) {
+      if (o.k === "r") {
+        ctx.fillStyle = o.fill;
+        ctx.beginPath();
+        if (o.r && ctx.roundRect) ctx.roundRect(o.x, o.y, o.w, o.h, Math.min(o.r, o.w / 2)); else ctx.rect(o.x, o.y, o.w, o.h);
+        ctx.fill();
+      } else if (o.k === "t") {
+        ctx.font = fontStr(o); ctx.fillStyle = o.fill; ctx.fillText(o.t, o.x, o.y);
+      } else if (o.k === "l") {
+        ctx.strokeStyle = o.stroke; ctx.lineWidth = o.lw;
+        ctx.beginPath(); ctx.moveTo(Math.round(o.x1) + 0.5, o.y1); ctx.lineTo(Math.round(o.x2) + 0.5, o.y2);
+        if (o.y1 === o.y2) { ctx.beginPath(); ctx.moveTo(o.x1, Math.round(o.y1) + 0.5); ctx.lineTo(o.x2, Math.round(o.y2) + 0.5); }
+        ctx.stroke();
+      } else if (o.k === "b") {
+        ctx.strokeStyle = o.stroke; ctx.lineWidth = 1;
+        ctx.strokeRect(Math.round(o.x) + 0.5, Math.round(o.y) + 0.5, o.w, o.h);
+      }
+    });
+    return c;
+  }
+  async function renderPng(sc) {
+    var scales = [2, 1.5, 1, 0.7, 0.5];
+    for (var i = 0; i < scales.length; i++) {
+      var s = scales[i];
+      var pw = sc.w * s, ph = sc.h * s;
+      if (pw > 32000 || ph > 32000 || pw * ph > 120e6) continue;
+      try {
+        var c = drawCanvas(sc, s);
+        if (!c) continue;
+        var blob = await new Promise(function (res) { c.toBlob(res, "image/png"); });
+        c.width = c.height = 0;
+        if (blob && blob.size > 0) return { blob: blob, w: Math.round(pw), h: Math.round(ph) };
+      } catch (e) {}
+    }
+    return null;
+  }
+  function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function toSvg(sc) {
+    var out = ['<svg xmlns="http://www.w3.org/2000/svg" width="' + sc.w + '" height="' + sc.h + '" viewBox="0 0 ' + sc.w + " " + sc.h + '">',
+      "<title>大模型编年图</title>",
+      '<style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap");</style>'];
+    function n(v) { return Math.round(v * 100) / 100; }
+    sc.ops.forEach(function (o) {
+      if (o.k === "r") out.push('<rect x="' + n(o.x) + '" y="' + n(o.y) + '" width="' + n(o.w) + '" height="' + n(o.h) + '"' + (o.r ? ' rx="' + Math.min(o.r, o.w / 2) + '"' : "") + ' fill="' + o.fill + '"/>');
+      else if (o.k === "t") out.push('<text x="' + n(o.x) + '" y="' + n(o.y) + '" font-size="' + o.s + '" font-weight="' + o.w + '" font-family="' + esc(o.f === "mono" ? MONO : SANS) + '" fill="' + o.fill + '">' + esc(o.t) + "</text>");
+      else if (o.k === "l") out.push('<line x1="' + n(o.x1) + '" y1="' + n(o.y1) + '" x2="' + n(o.x2) + '" y2="' + n(o.y2) + '" stroke="' + o.stroke + '" stroke-width="' + o.lw + '"/>');
+      else if (o.k === "b") out.push('<rect x="' + n(o.x) + '" y="' + n(o.y) + '" width="' + n(o.w) + '" height="' + n(o.h) + '" fill="none" stroke="' + o.stroke + '"/>');
+    });
+    out.push("</svg>");
+    return out.join("\n");
+  }
+  async function loadFonts() {
+    if (!document.fonts || !document.fonts.load) return;
+    var chars = {};
+    ("大模型编年图个家公司至数据截至今天系列每一格表示从发布到同下代的时长延伸红线是该当前最新版本长度不代已线日期按开或首次放使用计整理于月" +
+      items.map(function (it) { return it.m + it.lane + it.n; }).join("") +
+      COMPANIES.map(function (c) { return c.name + c.sub; }).join("") +
+      TYPES.map(function (t) { return t.name; }).join("")).split("").forEach(function (ch) { chars[ch] = 1; });
+    var sample = Object.keys(chars).join("");
+    var specs = ["400 13px", "500 13px", "700 13px", "900 13px"].map(function (w) { return document.fonts.load(w + ' "Noto Sans SC"', sample); })
+      .concat(["400 13px", "600 13px"].map(function (w) { return document.fonts.load(w + ' "IBM Plex Mono"', "0123456789-."); }));
+    await Promise.race([Promise.all(specs).catch(function () {}), new Promise(function (r) { setTimeout(r, 6000); })]);
+  }
+
+  expGo.addEventListener("click", async function () {
+    expGo.disabled = true;
+    expStatus.textContent = "正在绘制…";
+    try {
+      await loadFonts();
+      var from, to, ppd;
+      if (exp.range === "all") {
+        from = T0; to = T_END; ppd = 5;
+      } else {
+        from = T0 + (tl.scrollLeft / state.ppd) * DAY;
+        to = Math.min(T1, from + (trackW() / state.ppd) * DAY);
+        ppd = Math.max(state.ppd, Math.min(8, 2600 / ((to - from) / DAY)));
+      }
+      var sc = buildScene(from, to, ppd);
+      if (!sc.count) {
+        expStatus.textContent = "当前筛选条件下没有模型，调整筛选后再导出。";
+        return;
+      }
+      var stamp = TODAY_STR + (exp.range === "all" ? "-full" : "-view");
+      var file, data, sizeNote;
+      if (exp.fmt === "svg") {
+        data = new Blob([toSvg(sc)], { type: "image/svg+xml" });
+        file = "ai-model-timeline-" + stamp + ".svg";
+        sizeNote = sc.w + " × " + sc.h;
+      } else {
+        var png = await renderPng(sc);
+        if (!png) { expStatus.textContent = "图片尺寸超出了浏览器的画布上限。请改用 SVG 格式，或选择“当前视图”。"; return; }
+        data = png.blob;
+        file = "ai-model-timeline-" + stamp + ".png";
+        sizeNote = png.w + " × " + png.h + " 像素";
+      }
+      expStatus.textContent = "已生成 " + sizeNote + "，等待你确认保存…";
+      var res = await saveFile(file, data);
+      expStatus.textContent = res && res.status === "delivered" ? "已交付 " + file : "已保存 " + file + "（" + sizeNote + "）";
+    } catch (e) {
+      var code = e && e.code;
+      expStatus.textContent =
+        code === "declined" ? "已取消保存。" :
+        code === "rate_limited" ? "已经有一个保存窗口打开，请先处理它。" :
+        code === "too_large" ? "文件太大，无法保存。请选择“当前视图”缩小范围。" :
+        code === "bad_request" ? "生成的文件无效，请重试一次。" :
+        "这个查看环境不支持保存文件。";
+    } finally {
+      expGo.disabled = false;
+    }
+  });
+
+  // ---------- init ----------
+  applyFilters();
+  PRESETS["2023"](); markPreset("2023");
+  var rT;
+  window.addEventListener("resize", function () {
+    clearTimeout(rT);
+    rT = setTimeout(function () {
+      var p = $("presets").querySelector('[aria-pressed="true"]');
+      if (p) PRESETS[p.dataset.p](); else layout();
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

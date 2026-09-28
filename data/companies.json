@@ -1,0 +1,20 @@
+[
+  {"key": "openai", "name": "OpenAI", "sub": "ChatGPT · GPT · o 系列", "region": "US", "china": false},
+  {"key": "anthropic", "name": "Anthropic", "sub": "Claude", "region": "US", "china": false},
+  {"key": "google", "name": "Google", "sub": "DeepMind · Gemini", "region": "US", "china": false},
+  {"key": "meta", "name": "Meta", "sub": "Llama", "region": "US", "china": false},
+  {"key": "xai", "name": "xAI", "sub": "Grok", "region": "US", "china": false},
+  {"key": "microsoft", "name": "微软", "sub": "Microsoft · Phi · MAI", "region": "US", "china": false},
+  {"key": "amazon", "name": "亚马逊", "sub": "Amazon · Titan · Nova", "region": "US", "china": false},
+  {"key": "mistral", "name": "Mistral AI", "sub": "Mistral · Magistral", "region": "FR", "china": false},
+  {"key": "deepseek", "name": "深度求索", "sub": "DeepSeek", "region": "CN", "china": true},
+  {"key": "alibaba", "name": "阿里巴巴", "sub": "通义千问 Qwen · 万相", "region": "CN", "china": true},
+  {"key": "bytedance", "name": "字节跳动", "sub": "豆包 Doubao · Seed", "region": "CN", "china": true},
+  {"key": "zhipu", "name": "智谱", "sub": "清华系 · GLM · Z.ai", "region": "CN", "china": true},
+  {"key": "moonshot", "name": "月之暗面", "sub": "Kimi", "region": "CN", "china": true},
+  {"key": "baidu", "name": "百度", "sub": "文心一言 ERNIE", "region": "CN", "china": true},
+  {"key": "tencent", "name": "腾讯", "sub": "混元 Hunyuan", "region": "CN", "china": true},
+  {"key": "minimax", "name": "MiniMax", "sub": "稀宇科技 · 海螺", "region": "CN", "china": true},
+  {"key": "stepfun", "name": "阶跃星辰", "sub": "StepFun · Step", "region": "CN", "china": true},
+  {"key": "iflytek", "name": "科大讯飞", "sub": "讯飞星火 Spark", "region": "CN", "china": true}
+]

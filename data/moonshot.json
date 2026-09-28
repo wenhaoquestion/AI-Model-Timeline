@@ -1,0 +1,20 @@
+[
+  {"lane": "Kimi 通用旗舰", "m": "Kimi 智能助手", "d": "2023-10-09", "t": "flagship", "n": "20万字长上下文首发"},
+  {"lane": "Kimi 通用旗舰", "m": "Kimi 200万字长文本", "d": "2024-03-18", "t": "flagship", "n": "200万字无损上下文"},
+  {"lane": "Kimi 通用旗舰", "m": "Kimi K2", "d": "2025-07-11", "t": "open", "n": "1T MoE开源Agent模型"},
+  {"lane": "Kimi 通用旗舰", "m": "Kimi K2-0905", "d": "2025-09-05", "t": "open", "n": "256K上下文，编程增强"},
+  {"lane": "Kimi 通用旗舰", "m": "Kimi K2.5", "d": "2026-01-27", "t": "open", "n": "原生多模态，Agent集群"},
+  {"lane": "Kimi 通用旗舰", "m": "Kimi K2.6", "d": "2026-04-20", "t": "open", "n": "长程编程，300子Agent"},
+  {"lane": "Kimi 通用旗舰", "m": "Kimi K3", "d": "2026-07-16", "t": "open", "n": "2.8T最大开源权重模型"},
+  {"lane": "推理 k / Thinking", "m": "k0-math", "d": "2024-11-16", "t": "reasoning", "n": "数学推理模型"},
+  {"lane": "推理 k / Thinking", "m": "k1 视觉思考", "d": "2024-12-16", "t": "reasoning", "n": "视觉思考推理模型"},
+  {"lane": "推理 k / Thinking", "m": "Kimi k1.5", "d": "2025-01-20", "t": "reasoning", "n": "多模态长思维链推理"},
+  {"lane": "推理 k / Thinking", "m": "Kimi K2 Thinking", "d": "2025-11-06", "t": "reasoning", "n": "开源万亿思考Agent"},
+  {"lane": "编程 Code", "m": "Kimi-Dev-72B", "d": "2025-06-16", "t": "code", "n": "开源软件工程模型"},
+  {"lane": "编程 Code", "m": "Kimi K2.7 Code", "d": "2026-06-12", "t": "code", "n": "开源编程模型，省30%"},
+  {"lane": "编程 Code", "m": "Kimi K2.8 Preview", "d": "2026-09-11", "t": "code", "n": "逼近K3，1M上下文"},
+  {"lane": "开源研究模型", "m": "Moonlight-16B-A3B", "d": "2025-02-22", "t": "open", "n": "Muon优化器MoE"},
+  {"lane": "开源研究模型", "m": "Kimi-VL", "d": "2025-04-10", "t": "open", "n": "16B MoE视觉语言"},
+  {"lane": "开源研究模型", "m": "Kimi-Audio", "d": "2025-04-25", "t": "open", "n": "开源音频基座"},
+  {"lane": "开源研究模型", "m": "Kimi Linear", "d": "2025-10-30", "t": "open", "n": "48B线性注意力KDA"}
+]
