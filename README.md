@@ -11,6 +11,13 @@
 
 在线查看：**https://wenhaoquestion.github.io/AI-Model-Timeline/**
 
+<a href="https://wenhaoquestion.github.io/AI-Model-Timeline/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.png">
+    <img alt="大模型编年图截图：横轴为 2023–2026 年时间轴，纵轴为 OpenAI、Anthropic、Google 等公司及其模型系列，每个色块是一个模型的在位时长" src="docs/screenshot-light.png">
+  </picture>
+</a>
+
 ## 使用
 
 直接用浏览器打开 `dist/index.html` 即可，不需要服务器。页面只从 Google Fonts 加载字体，离线时会退回系统字体。
