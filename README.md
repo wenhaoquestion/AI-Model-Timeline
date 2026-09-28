@@ -9,9 +9,15 @@
 - 底部有全部模型的表格视图
 - 支持浅色 / 深色主题和手机屏幕
 
+在线查看：**https://wenhaoquestion.github.io/AI-Model-Timeline/**
+
 ## 使用
 
 直接用浏览器打开 `dist/index.html` 即可，不需要服务器。页面只从 Google Fonts 加载字体，离线时会退回系统字体。
+
+## 部署
+
+推送到 `main` 分支后，GitHub Actions（`.github/workflows/pages.yml`）会运行 `build.py` 校验数据、生成页面，并发布到 GitHub Pages。数据有错误时构建会失败，线上页面保持上一个版本。所以在 GitHub 网页上直接改 `data/*.json` 也能自动更新网站。
 
 ## 目录结构
 
