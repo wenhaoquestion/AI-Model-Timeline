@@ -1,0 +1,2648 @@
+{
+  "cutoff": "2026-09-29",
+  "scope": "Existing 10 Chinese vendors; named model-family releases and official catalog coverage, not every checkpoint, quantization, API alias or region",
+  "findings": [
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "MiniMax-01",
+      "proposed": {
+        "lane": "文本 MiniMax-Text",
+        "m": "MiniMax-Text-01",
+        "d": "2025-01-15",
+        "t": "open",
+        "n": "独立文本模型；原 MiniMax-01 合并条目拆分",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "MiniMax-01",
+      "proposed": {
+        "lane": "视觉 MiniMax-VL",
+        "m": "MiniMax-VL-01",
+        "d": "2025-01-15",
+        "t": "open",
+        "n": "独立视觉语言模型；与 Text-01 同日发布",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "海螺导演 T2V",
+        "m": "T2V-01-Director",
+        "d": "2025-02-11",
+        "t": "media",
+        "n": "镜头控制视频模型",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "海螺导演 I2V",
+        "m": "I2V-01-Director",
+        "d": "2025-02-11",
+        "t": "media",
+        "n": "镜头控制视频模型",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像生成",
+        "m": "Image-01",
+        "d": "2025-02-15",
+        "t": "media",
+        "n": "文生图 API 发布",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "海螺视频 Fast",
+        "m": "Hailuo 2.3 Fast",
+        "d": "2025-10-28",
+        "t": "media",
+        "n": "与 2.3 同日发布的快速版本",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "Speech-02",
+      "proposed": {
+        "lane": "语音合成 Turbo",
+        "m": "Speech-02-turbo",
+        "d": "2025-04-02",
+        "t": "media",
+        "n": "同系列独立语音档位",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "Speech-02",
+      "proposed": {
+        "lane": "语音合成 HD",
+        "m": "Speech-02-hd",
+        "d": "2025-04-02",
+        "t": "media",
+        "n": "同系列独立语音档位",
+        "s": "https://platform.minimax.io/docs/release-notes/models",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "rename",
+      "old": "Qwen3.5",
+      "proposed": {
+        "lane": "Qwen 大型 MoE",
+        "m": "Qwen3.5-397B-A17B",
+        "d": "2026-02-16",
+        "t": "open",
+        "n": "首批 Qwen3.5 仅含397B-A17B；不能用此日期代表之后所有尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen 122B-A10B",
+        "m": "Qwen3.5-122B-A10B",
+        "d": "2026-02-24",
+        "t": "open",
+        "n": "Qwen3.5 后续开源尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen 35B-A3B",
+        "m": "Qwen3.5-35B-A3B",
+        "d": "2026-02-24",
+        "t": "open",
+        "n": "Qwen3.5 后续开源尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen 27B",
+        "m": "Qwen3.5-27B",
+        "d": "2026-02-24",
+        "t": "open",
+        "n": "Qwen3.5 后续开源尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen 9B",
+        "m": "Qwen3.5-9B",
+        "d": "2026-03-02",
+        "t": "open",
+        "n": "Qwen3.5 后续开源尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen 4B",
+        "m": "Qwen3.5-4B",
+        "d": "2026-03-02",
+        "t": "open",
+        "n": "Qwen3.5 后续开源尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen 2B",
+        "m": "Qwen3.5-2B",
+        "d": "2026-03-02",
+        "t": "open",
+        "n": "Qwen3.5 后续开源尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen 0.8B",
+        "m": "Qwen3.5-0.8B",
+        "d": "2026-03-02",
+        "t": "open",
+        "n": "Qwen3.5 后续开源尺寸",
+        "s": "https://github.com/QwenLM/Qwen3.8",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen Max 旗舰",
+        "m": "Qwen3.8-Max-0902",
+        "d": "2026-09-02",
+        "t": "flagship",
+        "n": "官方 API 更新快照",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen Flash API",
+        "m": "Qwen3.8-Flash",
+        "d": "2026-08-26",
+        "t": "flagship",
+        "n": "API 模型；与 Flash-Next 权重名称区分",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen Flash API",
+        "m": "Qwen3.7-Flash",
+        "d": "2026-07-21",
+        "t": "flagship",
+        "n": "国际 API 日期；快照2026-07-15",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "Qwen Flash API",
+        "m": "Qwen3.6-Flash",
+        "d": "2026-04-17",
+        "t": "flagship",
+        "n": "国际 API 日期；快照2026-04-16",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "文本 Embedding",
+        "m": "Qwen3.7-Text-Embedding",
+        "d": "2026-07-31",
+        "t": "small",
+        "n": "国际 API 上线",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像翻译",
+        "m": "Qwen-MT-Image-2.0",
+        "d": "2026-08-28",
+        "t": "media",
+        "n": "图像翻译 API",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音合成 Plus",
+        "m": "Qwen-Audio-3.0-TTS-Plus",
+        "d": "2026-07-14",
+        "t": "media",
+        "n": "语音合成 API",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音合成 Flash",
+        "m": "Qwen-Audio-3.0-TTS-Flash",
+        "d": "2026-07-14",
+        "t": "media",
+        "n": "低延迟语音合成 API",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "理解与生成 JanusFlow",
+        "m": "JanusFlow",
+        "d": "2024-11-13",
+        "t": "media",
+        "n": "独立整流流生成模型",
+        "s": "https://github.com/deepseek-ai/Janus",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "source",
+      "old": "DeepSeek-OCR 2",
+      "proposed": {
+        "lane": "文档理解 OCR",
+        "m": "DeepSeek-OCR 2",
+        "d": "2026-01-27",
+        "t": "open",
+        "n": "应链接OCR2专门仓库；日期须结合报告/提交核对",
+        "s": "https://github.com/deepseek-ai/DeepSeek-OCR-2",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "deepseek",
+      "action": "correct_end",
+      "old": "DeepSeek-V4-Pro-0813",
+      "proposed": {
+        "lane": "V4 Pro 旗舰",
+        "m": "DeepSeek-V4-Pro-0813",
+        "d": "2026-08-13",
+        "t": "flagship",
+        "n": "8/13 GA；官方确认9/14后继续API服务",
+        "s": "https://api-docs.deepseek.com/updates/",
+        "verification": "verified"
+      },
+      "stage": "api_retired",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "GLM Air",
+        "m": "GLM-4.5-Air",
+        "d": "2025-07-28",
+        "t": "open",
+        "n": "106B/12B激活；并行轻量型号",
+        "s": "https://z.ai/blog/glm-4.5",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音识别",
+        "m": "GLM-ASR-2512",
+        "d": "2025-12-10",
+        "t": "media",
+        "n": "语音识别模型",
+        "s": "https://docs.z.ai/release-notes/new-released",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "手机 Agent",
+        "m": "AutoGLM-Phone-Multilingual",
+        "d": "2025-12-11",
+        "t": "open",
+        "n": "多语种移动端自动化模型/框架",
+        "s": "https://docs.z.ai/release-notes/new-released",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "GLM 9B",
+        "m": "GLM-4-9B",
+        "d": "2024-06-05",
+        "t": "open",
+        "n": "独立开源9B系列，不能与2024闭源GLM4合并",
+        "s": "https://github.com/zai-org/GLM-4",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "stepfun",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音交互",
+        "m": "Step-Audio 2",
+        "d": "2025-07-23",
+        "t": "media",
+        "n": "技术报告公开；不要误写为已开放完整模型权重",
+        "s": "https://github.com/stepfun-ai/Step-Audio2",
+        "verification": "verified"
+      },
+      "stage": "research_announcement",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "stepfun",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音推理 mini",
+        "m": "Step-Audio 2 mini Think",
+        "d": "2025-09-15",
+        "t": "open",
+        "n": "推理版独立权重",
+        "s": "https://github.com/stepfun-ai/Step-Audio2",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "stepfun",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "3D 生成",
+        "m": "Step1X-3D",
+        "d": "2025-05-13",
+        "t": "open",
+        "n": "几何与纹理模型、代码和权重公开",
+        "s": "https://github.com/stepfun-ai/Step1X-3D",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "stepfun",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像编辑",
+        "m": "Step1X-Edit-v1p2-preview",
+        "d": "2025-09-08",
+        "t": "open",
+        "n": "推理编辑预览版",
+        "s": "https://github.com/stepfun-ai/Step1X-Edit",
+        "verification": "verified"
+      },
+      "stage": "open_weights_preview",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "stepfun",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像编辑",
+        "m": "Step1X-Edit-v1p2",
+        "d": "2025-11-26",
+        "t": "open",
+        "n": "原生推理编辑正式权重",
+        "s": "https://github.com/stepfun-ai/Step1X-Edit",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "文档理解 OCR",
+        "m": "HunyuanOCR",
+        "d": "2025-11-25",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/HunyuanOCR",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "文档理解 OCR",
+        "m": "HunyuanOCR-1.5",
+        "d": "2026-07-07",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/HunyuanOCR",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图生视频",
+        "m": "HunyuanVideo-I2V",
+        "d": "2025-03-06",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/HunyuanVideo-I2V",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "数字人视频",
+        "m": "HunyuanVideo-Avatar",
+        "d": "2025-05-28",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/HunyuanVideo-Avatar",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "3D 开源",
+        "m": "Hunyuan3D 2.1",
+        "d": "2025-06-13",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "翻译 7B",
+        "m": "Hunyuan-MT-7B",
+        "d": "2025-09-01",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/Hunyuan-MT",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "翻译融合",
+        "m": "Hunyuan-MT-Chimera-7B",
+        "d": "2025-09-01",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/Hunyuan-MT",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "翻译 1.8B",
+        "m": "HY-MT1.5-1.8B",
+        "d": "2025-12-30",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/HY-MT",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "翻译 7B",
+        "m": "HY-MT1.5-7B",
+        "d": "2025-12-30",
+        "t": "open",
+        "n": "官方仓库 News 确认代码/权重发布",
+        "s": "https://github.com/Tencent-Hunyuan/HY-MT",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "混元 0.5B",
+        "m": "Hunyuan-0.5B",
+        "d": "2025-07-30",
+        "t": "open",
+        "n": "稠密基座与指令版本同日开源",
+        "s": "https://github.com/Tencent-Hunyuan/Hunyuan-0.5B/blob/main/README_CN.md",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "混元 1.8B",
+        "m": "Hunyuan-1.8B",
+        "d": "2025-07-30",
+        "t": "open",
+        "n": "稠密基座与指令版本同日开源",
+        "s": "https://github.com/Tencent-Hunyuan/Hunyuan-0.5B/blob/main/README_CN.md",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "混元 4B",
+        "m": "Hunyuan-4B",
+        "d": "2025-07-30",
+        "t": "open",
+        "n": "稠密基座与指令版本同日开源",
+        "s": "https://github.com/Tencent-Hunyuan/Hunyuan-0.5B/blob/main/README_CN.md",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "混元 7B",
+        "m": "Hunyuan-7B",
+        "d": "2025-07-30",
+        "t": "open",
+        "n": "稠密基座与指令版本同日开源",
+        "s": "https://github.com/Tencent-Hunyuan/Hunyuan-0.5B/blob/main/README_CN.md",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "stepfun",
+      "action": "correct",
+      "old": "Step1X-Edit",
+      "proposed": {
+        "lane": "图像编辑",
+        "m": "Step1X-Edit",
+        "d": "2025-04-25",
+        "t": "open",
+        "n": "4/25 首次权重与代码；旧4/27是社区FP8更新",
+        "s": "https://github.com/stepfun-ai/Step1X-Edit",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "stepfun",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像编辑",
+        "m": "Step1X-Edit-v1p1",
+        "d": "2025-07-09",
+        "t": "open",
+        "n": "图像编辑1.1权重",
+        "s": "https://github.com/stepfun-ai/Step1X-Edit",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "iflytek",
+      "action": "verify",
+      "old": "讯飞星火 X2.5",
+      "proposed": {
+        "lane": "星火主线",
+        "m": "讯飞星火 X2.5",
+        "d": "2026-09-07",
+        "t": "reasoning",
+        "n": "官方文章明确9月7日发布旗舰；与端侧开源版区分",
+        "s": "https://edu.iflytek.com/about-us/news/special-column/2903",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "iflytek",
+      "action": "split",
+      "old": "星火 X2.5-4B/1.7B",
+      "proposed": {
+        "lane": "星火端侧 4B",
+        "m": "Spark-X2.5-4B",
+        "d": "2026-09-01",
+        "t": "open",
+        "n": "官方端侧独立尺寸；9月1日全球开源",
+        "s": "https://github.com/XHToken/Spark-X2.5",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "iflytek",
+      "action": "split",
+      "old": "星火 X2.5-4B/1.7B",
+      "proposed": {
+        "lane": "星火端侧 1.7B",
+        "m": "Spark-X2.5-1.7B",
+        "d": "2026-09-01",
+        "t": "open",
+        "n": "官方端侧独立尺寸；9月1日全球开源",
+        "s": "https://github.com/XHToken/Spark-X2.5",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "moonshot",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "视觉思考 Kimi-VL",
+        "m": "Kimi-VL-A3B-Thinking-2506",
+        "d": "2025-06-21",
+        "t": "open",
+        "n": "独立思考更新；并行于Instruct模型",
+        "s": "https://github.com/moonshotai/Kimi-VL",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "moonshot",
+      "action": "split",
+      "old": "Kimi-VL",
+      "proposed": {
+        "lane": "视觉理解 Kimi-VL",
+        "m": "Kimi-VL-A3B-Instruct",
+        "d": "2025-04-10",
+        "t": "open",
+        "n": "官方型号；首次开源日仍需日期证据",
+        "s": "https://github.com/moonshotai/Kimi-VL",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "moonshot",
+      "action": "split",
+      "old": "Kimi-VL",
+      "proposed": {
+        "lane": "视觉思考 Kimi-VL",
+        "m": "Kimi-VL-A3B-Thinking",
+        "d": "2025-04-10",
+        "t": "open",
+        "n": "原始思考版；首次开源日仍需日期证据",
+        "s": "https://github.com/moonshotai/Kimi-VL",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "baidu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "文档理解 PaddleOCR",
+        "m": "PaddleOCR-VL",
+        "d": "2025-10-16",
+        "t": "open",
+        "n": "官方软件发布记录明确命名模型发布",
+        "s": "https://github.com/PaddlePaddle/PaddleOCR",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "baidu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "文档理解 PaddleOCR",
+        "m": "PaddleOCR-VL-1.6",
+        "d": "2026-05-28",
+        "t": "open",
+        "n": "官方软件发布记录明确命名模型发布",
+        "s": "https://github.com/PaddlePaddle/PaddleOCR",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "baidu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "轻量推理",
+        "m": "ERNIE-4.5-21B-A3B-Thinking",
+        "d": "2025-09",
+        "t": "open",
+        "n": "官方仓库9月日志确认已支持；具体首发日待核",
+        "s": "https://github.com/PaddlePaddle/ERNIE",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "month",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "形式证明 Prover",
+        "m": "DeepSeek-Prover-V1",
+        "d": "2024-05-23",
+        "t": "open",
+        "n": "作者论文首次提交；权重首发日未单独确认",
+        "s": "https://arxiv.org/abs/2405.14333",
+        "verification": "verified"
+      },
+      "stage": "research_announcement",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 Zero",
+        "m": "DeepSeek-R1-Zero",
+        "d": "2025-01-20",
+        "t": "reasoning",
+        "n": "与R1同发布的纯强化学习模型",
+        "s": "https://github.com/deepseek-ai/DeepSeek-R1",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 蒸馏 Qwen-1.5B",
+        "m": "DeepSeek-R1-Distill-Qwen-1.5B",
+        "d": "2025-01-20",
+        "t": "open",
+        "n": "六款蒸馏模型同日开放；名称由官方R1仓库核对",
+        "s": "https://api-docs.deepseek.com/news/news250120/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 蒸馏 Qwen-7B",
+        "m": "DeepSeek-R1-Distill-Qwen-7B",
+        "d": "2025-01-20",
+        "t": "open",
+        "n": "六款蒸馏模型同日开放；名称由官方R1仓库核对",
+        "s": "https://api-docs.deepseek.com/news/news250120/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 蒸馏 Llama-8B",
+        "m": "DeepSeek-R1-Distill-Llama-8B",
+        "d": "2025-01-20",
+        "t": "open",
+        "n": "六款蒸馏模型同日开放；名称由官方R1仓库核对",
+        "s": "https://api-docs.deepseek.com/news/news250120/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 蒸馏 Qwen-14B",
+        "m": "DeepSeek-R1-Distill-Qwen-14B",
+        "d": "2025-01-20",
+        "t": "open",
+        "n": "六款蒸馏模型同日开放；名称由官方R1仓库核对",
+        "s": "https://api-docs.deepseek.com/news/news250120/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 蒸馏 Qwen-32B",
+        "m": "DeepSeek-R1-Distill-Qwen-32B",
+        "d": "2025-01-20",
+        "t": "open",
+        "n": "六款蒸馏模型同日开放；名称由官方R1仓库核对",
+        "s": "https://api-docs.deepseek.com/news/news250120/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 蒸馏 Llama-70B",
+        "m": "DeepSeek-R1-Distill-Llama-70B",
+        "d": "2025-01-20",
+        "t": "open",
+        "n": "六款蒸馏模型同日开放；名称由官方R1仓库核对",
+        "s": "https://api-docs.deepseek.com/news/news250120/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "音频理解",
+        "m": "Qwen-Audio",
+        "d": "2023-11-30",
+        "t": "open",
+        "n": "权重公开；论文11/15",
+        "s": "https://github.com/QwenLM/Qwen-Audio",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "音频理解",
+        "m": "Qwen2-Audio",
+        "d": "2024-08-09",
+        "t": "open",
+        "n": "7B基座与指令版",
+        "s": "https://qwenlm.github.io/blog/qwen2-audio/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "数学 Qwen-Math",
+        "m": "Qwen2-Math",
+        "d": "2024-08-08",
+        "t": "open",
+        "n": "1.5B/7B/72B数学系列",
+        "s": "https://qwenlm.github.io/blog/qwen2-math/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "数学 Qwen-Math",
+        "m": "Qwen2.5-Math",
+        "d": "2024-09-19",
+        "t": "open",
+        "n": "1.5B/7B/72B数学系列",
+        "s": "https://qwenlm.github.io/blog/qwen2.5-math/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "数学奖励模型",
+        "m": "Qwen2.5-Math-RM-72B",
+        "d": "2024-09-19",
+        "t": "open",
+        "n": "独立数学奖励模型",
+        "s": "https://qwenlm.github.io/blog/qwen2.5-math/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "文本 Embedding",
+        "m": "Qwen3-Embedding",
+        "d": "2025-06-05",
+        "t": "open",
+        "n": "0.6B/4B/8B嵌入系列",
+        "s": "https://qwenlm.github.io/blog/qwen3-embedding/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "文本 Reranker",
+        "m": "Qwen3-Reranker",
+        "d": "2025-06-05",
+        "t": "open",
+        "n": "0.6B/4B/8B重排系列",
+        "s": "https://qwenlm.github.io/blog/qwen3-embedding/",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音合成 Qwen-TTS",
+        "m": "Qwen3-TTS",
+        "d": "2026-01-21",
+        "t": "open",
+        "n": "官方博客日期；1.7B与0.6B语音生成系列",
+        "s": "https://qwen.ai/blog?id=qwen3tts-0115",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音识别 1.7B",
+        "m": "Qwen3-ASR-1.7B",
+        "d": "2026-01-28",
+        "t": "open",
+        "n": "官方博客日期",
+        "s": "https://qwen.ai/blog?id=qwen3asr",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音识别 0.6B",
+        "m": "Qwen3-ASR-0.6B",
+        "d": "2026-01-28",
+        "t": "open",
+        "n": "官方博客日期",
+        "s": "https://qwen.ai/blog?id=qwen3asr",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "语音强制对齐",
+        "m": "Qwen3-ForcedAligner-0.6B",
+        "d": "2026-01-28",
+        "t": "open",
+        "n": "独立非自回归对齐模型",
+        "s": "https://qwen.ai/blog?id=qwen3asr",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "形式证明",
+        "m": "Seed Prover",
+        "d": "2025-07-23",
+        "t": "reasoning",
+        "n": "研究公布；未验证公共API/权重",
+        "s": "https://seed.bytedance.com/en/blog/bytedance-seed-prover-achieves-silver-medal-score-in-imo-2025",
+        "verification": "verified"
+      },
+      "stage": "research_announcement",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "形式证明",
+        "m": "Seed Prover 1.5",
+        "d": "2025-12-24",
+        "t": "reasoning",
+        "n": "技术报告公布；API仅称未来计划",
+        "s": "https://seed.bytedance.com/en/blog/seed-prover-1-5-advanced-mathematical-reasoning-through-a-novel-agentic-architecture",
+        "verification": "verified"
+      },
+      "stage": "research_announcement",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "扩散语言",
+        "m": "Seed Diffusion Preview",
+        "d": "2025-07-31",
+        "t": "flagship",
+        "n": "官方博客索引确认研究预览",
+        "s": "https://seed.bytedance.com/en/blog_list/foundation",
+        "verification": "verified"
+      },
+      "stage": "research_preview",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "多模态 Embedding",
+        "m": "Seed-1.6-Embedding",
+        "d": "2025-06-28",
+        "t": "media",
+        "n": "官方博客索引列明发布",
+        "s": "https://seed.bytedance.com/en/blog_list/foundation",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "视觉理解",
+        "m": "Seed VLM",
+        "d": "2025-05-13",
+        "t": "media",
+        "n": "官方博客索引记录技术报告",
+        "s": "https://seed.bytedance.com/en/blog_list/foundation",
+        "verification": "verified"
+      },
+      "stage": "research_announcement",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像编辑",
+        "m": "SeedEdit 3.0",
+        "d": "2025-06-06",
+        "t": "media",
+        "n": "报告+即梦网页测试",
+        "s": "https://seed.bytedance.com/en/blog/bytedance-released-image-editing-model-seededit-3-0-enhanced-image-consistency-and-usability-rate",
+        "verification": "verified"
+      },
+      "stage": "public_preview",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "3D 生成",
+        "m": "Seed3D 2.0",
+        "d": "2026-04-23",
+        "t": "media",
+        "n": "正式API发布；报告4/22",
+        "s": "https://seed.bytedance.com/en/blog/seed3d-2-0-released-higher-precision-and-greater-usability",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "split",
+      "old": "Doubao-Seed-2.0",
+      "proposed": {
+        "lane": "豆包/Seed Pro",
+        "m": "Doubao-Seed-2.0-Pro",
+        "d": "2026-02-14",
+        "t": "flagship",
+        "n": "同日并行独立型号；Code已单列",
+        "s": "https://seed.bytedance.com/en/blog/seed-2-0-official-launch",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "split",
+      "old": "Doubao-Seed-2.0",
+      "proposed": {
+        "lane": "豆包/Seed Lite",
+        "m": "Doubao-Seed-2.0-Lite",
+        "d": "2026-02-14",
+        "t": "small",
+        "n": "同日并行独立型号；Code已单列",
+        "s": "https://seed.bytedance.com/en/blog/seed-2-0-official-launch",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "split",
+      "old": "Doubao-Seed-2.0",
+      "proposed": {
+        "lane": "豆包/Seed Mini",
+        "m": "Doubao-Seed-2.0-Mini",
+        "d": "2026-02-14",
+        "t": "small",
+        "n": "同日并行独立型号；Code已单列",
+        "s": "https://seed.bytedance.com/en/blog/seed-2-0-official-launch",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "split",
+      "old": "Doubao-Seed-2.1",
+      "proposed": {
+        "lane": "豆包/Seed Pro",
+        "m": "Doubao-Seed-2.1-Pro",
+        "d": "2026-06-23",
+        "t": "flagship",
+        "n": "官方产品页确认Pro/Turbo两档；日期由6/23发布博客核对",
+        "s": "https://seed.bytedance.com/en/seed2_1",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "split",
+      "old": "Doubao-Seed-2.1",
+      "proposed": {
+        "lane": "豆包/Seed Turbo",
+        "m": "Doubao-Seed-2.1-Turbo",
+        "d": "2026-06-23",
+        "t": "flagship",
+        "n": "官方产品页确认Pro/Turbo两档；日期由6/23发布博客核对",
+        "s": "https://seed.bytedance.com/en/seed2_1",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-5.3-FlashX",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-5-Turbo",
+        "d": null,
+        "t": "flagship",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4.7-FlashX",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4.5-AirX",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4-Long",
+        "d": null,
+        "t": "flagship",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4-FlashX-250414",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4.5-Flash",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4-Flash-250414",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4.1V-Thinking-FlashX",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4.6V-Flash",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4.1V-Thinking-Flash",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4V-Flash",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM-TTS",
+        "m": "GLM-TTS",
+        "d": null,
+        "t": "media",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM-TTS-Clone",
+        "m": "GLM-TTS-Clone",
+        "d": null,
+        "t": "media",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM-Realtime",
+        "m": "GLM-Realtime",
+        "d": null,
+        "t": "media",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 GLM",
+        "m": "GLM-4-Voice",
+        "d": null,
+        "t": "media",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 Embedding",
+        "m": "Embedding-3",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 Embedding",
+        "m": "Embedding-2",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 CodeGeeX",
+        "m": "CodeGeeX-4",
+        "d": null,
+        "t": "code",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 Rerank",
+        "m": "Rerank",
+        "d": null,
+        "t": "small",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 CogView",
+        "m": "CogView-3-Flash",
+        "d": null,
+        "t": "media",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "zhipu",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "目录 CogVideoX-Flash",
+        "m": "CogVideoX-Flash",
+        "d": null,
+        "t": "media",
+        "n": "官方现行目录确有此型号；首次发布日期待核",
+        "s": "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "minimax",
+      "action": "correct",
+      "old": "M3.1-Flash-Preview",
+      "proposed": {
+        "lane": "M Flash 编程",
+        "m": "MiniMax-M3.1-Flash-Preview",
+        "d": null,
+        "t": "code",
+        "n": "官方确认仅Token Plan和Code可用；首发日期待核，不采用代码提交日",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "unverified"
+      },
+      "stage": "limited_preview",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "minimax",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "MiniMax 高速",
+        "m": "MiniMax-M2.7-highspeed",
+        "d": "2026-03-18",
+        "t": "code",
+        "n": "官方API型号；为同能力高速部署版本，非新架构",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "verified"
+      },
+      "stage": "api_variant",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "minimax",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "MiniMax 高速",
+        "m": "MiniMax-M2.5-highspeed",
+        "d": null,
+        "t": "code",
+        "n": "官方API型号；为同能力高速部署版本，非新架构",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "unverified"
+      },
+      "stage": "api_variant",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "minimax",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "MiniMax 高速",
+        "m": "MiniMax-M2.1-highspeed",
+        "d": null,
+        "t": "code",
+        "n": "官方API型号；为同能力高速部署版本，非新架构",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "unverified"
+      },
+      "stage": "api_variant",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "tencent",
+      "action": "verify",
+      "old": "Hy ASR 3.0 preview",
+      "proposed": {
+        "lane": "语音识别",
+        "m": "Hy ASR 3.0 preview",
+        "d": "2026-08-04",
+        "t": "media",
+        "n": "腾讯云产品动态明确新增引擎日期",
+        "s": "https://cloud.tencent.com/document/product/1093/46797",
+        "verification": "verified"
+      },
+      "stage": "api_preview",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "翻译 1.8B",
+        "m": "Hy-MT2-1.8B",
+        "d": "2026-05-21",
+        "t": "open",
+        "n": "官方仓库列明三档权重同日发布",
+        "s": "https://github.com/Tencent-Hunyuan/Hy-MT2",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "翻译 7B",
+        "m": "Hy-MT2-7B",
+        "d": "2026-05-21",
+        "t": "open",
+        "n": "官方仓库列明三档权重同日发布",
+        "s": "https://github.com/Tencent-Hunyuan/Hy-MT2",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "tencent",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "翻译 30B-A3B",
+        "m": "Hy-MT2-30B-A3B",
+        "d": "2026-05-21",
+        "t": "open",
+        "n": "官方仓库列明三档权重同日发布",
+        "s": "https://github.com/Tencent-Hunyuan/Hy-MT2",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像编辑 Qwen",
+        "m": "Qwen-Image-Edit",
+        "d": "2025-08-18",
+        "t": "media",
+        "n": "官方仓库发布日志",
+        "s": "https://github.com/QwenLM/Qwen-Image",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像编辑 Qwen",
+        "m": "Qwen-Image-Edit-2509",
+        "d": "2025-09-22",
+        "t": "media",
+        "n": "官方仓库发布日志",
+        "s": "https://github.com/QwenLM/Qwen-Image",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像编辑 Qwen",
+        "m": "Qwen-Image-Edit-2511",
+        "d": "2025-12-23",
+        "t": "media",
+        "n": "官方仓库发布日志",
+        "s": "https://github.com/QwenLM/Qwen-Image",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像分层",
+        "m": "Qwen-Image-Layered",
+        "d": "2025-12-19",
+        "t": "media",
+        "n": "官方仓库发布日志",
+        "s": "https://github.com/QwenLM/Qwen-Image",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "图像 Qwen-Image",
+        "m": "Qwen-Image-2512",
+        "d": "2025-12-31",
+        "t": "media",
+        "n": "官方仓库发布日志",
+        "s": "https://github.com/QwenLM/Qwen-Image",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "多模态 Embedding",
+        "m": "Qwen3-VL-Embedding-2B",
+        "d": null,
+        "t": "open",
+        "n": "官方仓库确认模型身份；首发日期待核",
+        "s": "https://github.com/QwenLM/Qwen3-VL-Embedding",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "多模态 Embedding",
+        "m": "Qwen3-VL-Embedding-8B",
+        "d": null,
+        "t": "open",
+        "n": "官方仓库确认模型身份；首发日期待核",
+        "s": "https://github.com/QwenLM/Qwen3-VL-Embedding",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "多模态 Reranker",
+        "m": "Qwen3-VL-Reranker-2B",
+        "d": null,
+        "t": "open",
+        "n": "官方仓库确认模型身份；首发日期待核",
+        "s": "https://github.com/QwenLM/Qwen3-VL-Embedding",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "多模态 Reranker",
+        "m": "Qwen3-VL-Reranker-8B",
+        "d": null,
+        "t": "open",
+        "n": "官方仓库确认模型身份；首发日期待核",
+        "s": "https://github.com/QwenLM/Qwen3-VL-Embedding",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "bytedance",
+      "action": "correct",
+      "old": "Seed-Coder-8B",
+      "proposed": {
+        "lane": "代码 Code",
+        "m": "Seed-Coder-8B",
+        "d": "2025-05-08",
+        "t": "code",
+        "n": "官方仓库首发5/8；5/19博客为后续BF16与数据管线发布",
+        "s": "https://github.com/ByteDance-Seed/Seed-Coder",
+        "verification": "verified"
+      },
+      "stage": "open_weights",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "bytedance",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "3D 生成",
+        "m": "Seed3D 1.0",
+        "d": "2025-10-23",
+        "t": "media",
+        "n": "报告与API同日公开",
+        "s": "https://seed.bytedance.com/en/blog/seed3d-1-0-released-generate-high-fidelity-3d-models-from-single-images-featuring-sota-texturing",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "代码 Coder 轻量",
+        "m": "Qwen3-Coder-30B-A3B-Instruct",
+        "d": null,
+        "t": "code",
+        "n": "官方仓库确认独立30B型号；首发日待核",
+        "s": "https://github.com/QwenLM/Qwen3-Coder",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "alibaba",
+      "action": "correct",
+      "old": "Qwen3.8-Max",
+      "proposed": {
+        "lane": "Qwen Max 旗舰",
+        "m": "Qwen3.8-Max",
+        "d": "2026-08-02",
+        "t": "flagship",
+        "n": "官方API目录8/2上线；官方新闻稿8/3宣布，两个阶段应分清",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "split",
+      "old": "Qwen-Image-3.0",
+      "proposed": {
+        "lane": "图像 Qwen-Image Pro",
+        "m": "Qwen-Image-3.0-Pro",
+        "d": "2026-07-20",
+        "t": "media",
+        "n": "国际API7/20；当前7/21为博客日",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "split",
+      "old": "Qwen-Image-3.0",
+      "proposed": {
+        "lane": "图像 Qwen-Image",
+        "m": "Qwen-Image-3.0",
+        "d": "2026-08-04",
+        "t": "media",
+        "n": "中国内地标准版API8/4，区别于7月Pro版",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "split",
+      "old": "Qwen3.5-Omni",
+      "proposed": {
+        "lane": "全模态 Plus",
+        "m": "Qwen3.5-Omni-Plus",
+        "d": "2026-03-26",
+        "t": "media",
+        "n": "国际API明确上线；旧合并记录3/30无法代表各版本最早API可用日",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "split",
+      "old": "Qwen3.5-Omni",
+      "proposed": {
+        "lane": "全模态 Flash",
+        "m": "Qwen3.5-Omni-Flash",
+        "d": "2026-03-26",
+        "t": "media",
+        "n": "国际API明确上线；旧合并记录3/30无法代表各版本最早API可用日",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "split",
+      "old": "Qwen3.5-Omni",
+      "proposed": {
+        "lane": "实时全模态 Plus-Realtime",
+        "m": "Qwen3.5-Omni-Plus-Realtime",
+        "d": "2026-03-25",
+        "t": "media",
+        "n": "国际API明确上线；旧合并记录3/30无法代表各版本最早API可用日",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "alibaba",
+      "action": "split",
+      "old": "Qwen3.5-Omni",
+      "proposed": {
+        "lane": "实时全模态 Flash-Realtime",
+        "m": "Qwen3.5-Omni-Flash-Realtime",
+        "d": "2026-03-26",
+        "t": "media",
+        "n": "国际API明确上线；旧合并记录3/30无法代表各版本最早API可用日",
+        "s": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "verification": "verified"
+      },
+      "stage": "api_release",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "iflytek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "星火轻量",
+        "m": "Spark Lite",
+        "d": null,
+        "t": "small",
+        "n": "官方目录确认自研型号；页面更新时间不是首发日",
+        "s": "https://maas.xfyun.cn/modelSquare",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "iflytek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "星火小型",
+        "m": "Spark Mini",
+        "d": null,
+        "t": "small",
+        "n": "官方目录确认自研型号；页面更新时间不是首发日",
+        "s": "https://maas.xfyun.cn/modelSquare",
+        "verification": "unverified"
+      },
+      "stage": "catalog_available",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "V 系列通用",
+        "m": "DeepSeek-V2.5-1210",
+        "d": "2024-12-10",
+        "t": "flagship",
+        "n": "官方型号已证实；R1小型号不能仅从0528后缀推定发布日",
+        "s": "https://api-docs.deepseek.com/news/news250120/",
+        "verification": "verified"
+      },
+      "stage": "released",
+      "date_precision": "day",
+      "confidence": "verified"
+    },
+    {
+      "company": "deepseek",
+      "action": "add",
+      "old": null,
+      "proposed": {
+        "lane": "R1 蒸馏 Qwen-8B",
+        "m": "DeepSeek-R1-0528-Qwen3-8B",
+        "d": null,
+        "t": "open",
+        "n": "官方型号已证实；R1小型号不能仅从0528后缀推定发布日",
+        "s": "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+        "verification": "unverified"
+      },
+      "stage": "open_weights",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "Speech-2.6",
+      "proposed": {
+        "lane": "语音合成 HD",
+        "m": "Speech-2.6-hd",
+        "d": null,
+        "t": "media",
+        "n": "官方独立API档位；系列发布日期不能自动证明每个档位首发日",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "unverified"
+      },
+      "stage": "api_variant",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "Speech-2.6",
+      "proposed": {
+        "lane": "语音合成 Turbo",
+        "m": "Speech-2.6-turbo",
+        "d": null,
+        "t": "media",
+        "n": "官方独立API档位；系列发布日期不能自动证明每个档位首发日",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "unverified"
+      },
+      "stage": "api_variant",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "Speech-2.8",
+      "proposed": {
+        "lane": "语音合成 HD",
+        "m": "Speech-2.8-hd",
+        "d": null,
+        "t": "media",
+        "n": "官方独立API档位；系列发布日期不能自动证明每个档位首发日",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "unverified"
+      },
+      "stage": "api_variant",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    },
+    {
+      "company": "minimax",
+      "action": "split",
+      "old": "Speech-2.8",
+      "proposed": {
+        "lane": "语音合成 Turbo",
+        "m": "Speech-2.8-turbo",
+        "d": null,
+        "t": "media",
+        "n": "官方独立API档位；系列发布日期不能自动证明每个档位首发日",
+        "s": "https://platform.minimax.io/docs/guides/models-intro",
+        "verification": "unverified"
+      },
+      "stage": "api_variant",
+      "date_precision": "unknown",
+      "confidence": "date_pending"
+    }
+  ],
+  "coverage": [
+    {
+      "company": "deepseek",
+      "checked": "API release index/current V4.1 announcement; R1/Janus/Prover/OCR repos and author paper",
+      "verified_latest": "V4.1-Flash 2026-09-10; prior Flash retired; Pro API continues after 2026-09-14 per updated official changelog",
+      "remaining": "LLM/Coder/VL size variants and every historical snapshot not exhaustively expanded. OCR2 date preserved pending exact release-date evidence.",
+      "sources": [
+        "https://api-docs.deepseek.com/news/news260910/",
+        "https://api-docs.deepseek.com/news/news250120/"
+      ]
+    },
+    {
+      "company": "alibaba",
+      "checked": "Model Studio API lifecycle, Qwen3.8 repository chronology, Qwen image/audio/math/embedding/coder family sources",
+      "verified_latest": "Sep24 Decision-Model-Preview remains latest dated catalog family; existing Sep17-21 Omni/LiveTranslate/Audio records present",
+      "remaining": "Every legacy Qwen size, fine-tuning checkpoint, quantization and regional duplicate not expanded. API launch dates differ from blog dates and snapshot suffixes; do not collapse stages.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "https://github.com/QwenLM/Qwen3.8",
+        "https://github.com/QwenLM/Qwen-Image"
+      ]
+    },
+    {
+      "company": "bytedance",
+      "checked": "Official foundation-blog index, latest research page, Seed2.0/2.1 tier declarations, Seed-Coder/Seed-OSS repos, Seed3D/SeedEdit/Prover announcements",
+      "verified_latest": "Seed2.1 June23; Seedream5Pro July8; SeedAudio1 July20; Seedance2.5 July31; SeedRealtime exists in current research page",
+      "remaining": "Legacy Seed-TTS/ASR, Seedance Lite tiers and every Volcano snapshot remain coverage gaps; no dates invented. Research Prover/Diffusion milestones must not imply public API or open weights.",
+      "sources": [
+        "https://seed.bytedance.com/en/blog_list/foundation",
+        "https://seed.bytedance.com/en/research",
+        "https://github.com/ByteDance-Seed/Seed-Coder"
+      ]
+    },
+    {
+      "company": "zhipu",
+      "checked": "Complete current BigModel overview catalog excluding third-party Vidu; official international changelog; GLM4/4.5 sources",
+      "verified_latest": "GLM5.3-Flash Aug26; GLM5.3-FlashX current identity verified but first date pending",
+      "remaining": "GLM5 Feb11 vs Feb12, GLM5.1 Mar27 vs Apr7 and GLM5.3 Aug14 vs Aug18 are region/announcement conflicts; do not overwrite earliest dates solely from international release log. GLM5V-Turbo exact first date unresolved.",
+      "sources": [
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "https://docs.z.ai/release-notes/new-released"
+      ]
+    },
+    {
+      "company": "moonshot",
+      "checked": "Kimi official blog, Code model-release changelog, Kimi-VL repo",
+      "verified_latest": "K2.8 Preview Sep11 Code rollout confirmed; K3 July16 API announcement confirmed",
+      "remaining": "K3 launch blog promises weights byJuly27 while retrospective Code note calls July16 open; keep July16 as API stage, do not claim same-day weights. Early k0/k1 public release dates not reverified.",
+      "sources": [
+        "https://www.kimi.com/en/blog/kimi-k3",
+        "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+        "https://github.com/moonshotai/Kimi-VL"
+      ]
+    },
+    {
+      "company": "baidu",
+      "checked": "ERNIE official blog/current repo; PaddleOCR release chronology",
+      "verified_latest": "ERNIE5.1 May9 official announcement; PaddleOCR-VL1.6 May28 missing and now proposed",
+      "remaining": "ERNIE5.1 Preview April29 not established by April30 leaderboard announcement; retain uncertainty. ERNIE5 formal model appears on Jan15 leaderboard before Jan22 launch; stages differ. Every ERNIE4.5 size and old cloud speed/lite variant not expanded.",
+      "sources": [
+        "https://yiyan.baidu.com/blog/zh/",
+        "https://github.com/PaddlePaddle/ERNIE",
+        "https://github.com/PaddlePaddle/PaddleOCR"
+      ]
+    },
+    {
+      "company": "tencent",
+      "checked": "Official Hy4 newsroom; ASR product log; current organization, OCR, translation, dense, 3D and video repositories",
+      "verified_latest": "Hy4 Preview Aug28 verified; HyASR3 preview Aug4 verified",
+      "remaining": "HyImage3.5 preview Sep21 and HYWorld2.1 July are still pending exact first-release confirmation. Do not treat future Hy4-series promises as released.",
+      "sources": [
+        "https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/",
+        "https://cloud.tencent.com/document/product/1093/46797",
+        "https://github.com/Tencent-Hunyuan/Hy-MT2"
+      ]
+    },
+    {
+      "company": "minimax",
+      "checked": "Official complete current models catalog and release log",
+      "verified_latest": "M3.1-Flash-Preview current official availability confirmed but first date unresolved; retain visibly with d:null",
+      "remaining": "H3 Max is explicitly a fal.ai post-trained derivative, not a new MiniMax-authored base model; excluded. Highspeed API variants share stated capability. Legacy abab variants not exhaustively dated.",
+      "sources": [
+        "https://platform.minimax.io/docs/guides/models-intro",
+        "https://platform.minimax.io/docs/release-notes/models"
+      ]
+    },
+    {
+      "company": "stepfun",
+      "checked": "Current official product site, 3.5/3.7 blogs and official image/audio/3D repos",
+      "verified_latest": "Step5 Preview present in catalog; October15 open-weight promise remains future as of cutoff. StepAudio3 family already in data.",
+      "remaining": "Step3.5Flash exact first date not visible in retrieved primary pages; retain pending. StepAudio3 paper/API stages already distinguished; Step5 Sep20 not independently date-resolved in this pass.",
+      "sources": [
+        "https://platform.stepfun.com/",
+        "https://github.com/stepfun-ai/Step1X-Edit",
+        "https://github.com/stepfun-ai/Step-Audio2"
+      ]
+    },
+    {
+      "company": "iflytek",
+      "checked": "Official SparkAPI/current MaaS catalog, SparkX2.5 repo, iFlytek education corporate article",
+      "verified_latest": "X2.5 flagship Sep7 and open1.7B/4B Sep1 verified separately",
+      "remaining": "X2 February11 first-release claim conflicts with API document updateFebruary9 and remains unverified. X2VL June11 current third-party government evidence not independently upgraded to issuer first source.",
+      "sources": [
+        "https://edu.iflytek.com/about-us/news/special-column/2903",
+        "https://github.com/XHToken/Spark-X2.5",
+        "https://www.xfyun.cn/doc/spark/X1ws.html"
+      ]
+    }
+  ],
+  "notes": [
+    "verified means the proposed identity/date-stage is directly supported by the cited official source; not a claim all historical records are verified.",
+    "date_pending entries should remain visible in a catalog and not get a fabricated timeline day.",
+    "Recommended lane labels are implementation suggestions; renderer must not imply sibling retirement just because a different capability variant was added.",
+    "Research reports/previews and API/open-weight releases must be shown distinctly. No future planned weight release should be labeled completed."
+  ],
+  "final_review_corrections": [
+    {
+      "model": "DeepSeek-V4-Pro-0813",
+      "finding": "Official changelog reverses initial planned routing: V4 Pro API continues after 2026-09-14 with unchanged billing. Remove end; prior routing proposal is superseded.",
+      "source": "https://api-docs.deepseek.com/updates/"
+    },
+    {
+      "model": "GLM-5.3 / Hy Image 3.5 preview / Step 5 Preview",
+      "finding": "Known exact-date uncertainty was not integrated; marked unverified pending direct day-level official evidence."
+    }
+  ]
+}

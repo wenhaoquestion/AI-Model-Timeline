@@ -20,6 +20,22 @@ class DateTests(unittest.TestCase):
 
 
 class DatasetTests(unittest.TestCase):
+    def test_previously_published_model_names_remain_findable(self):
+        audit = json.loads((build.ROOT / 'docs/record-audit-first-update.json').read_text())
+        as_of = json.loads((build.ROOT / 'site.json').read_text())['asOf']
+        _, rows, errors, _ = build.load(as_of)
+        self.assertFalse(errors)
+        names = {(row['c'], name) for row in rows for name in [row['m']] + row.get('aliases', [])}
+        previous = [(r['company'], r['old']['m']) for r in audit['mappings']]
+        previous += [(r['c'], r['m']) for r in audit['first_update_records']]
+        self.assertEqual([key for key in previous if key not in names], [])
+
+    def test_audited_records_have_source_or_explicit_uncertainty(self):
+        as_of = json.loads((build.ROOT / 'site.json').read_text())['asOf']
+        _, rows, errors, _ = build.load(as_of)
+        self.assertFalse(errors)
+        self.assertEqual([r['m'] for r in rows if not r.get('s') and r.get('verification') != 'unverified'], [])
+
     def validate(self, rows, companies=None):
         with tempfile.TemporaryDirectory() as tmp:
             data = Path(tmp)
@@ -64,6 +80,28 @@ class DatasetTests(unittest.TestCase):
 
     def test_historical_month_retained(self):
         self.assertFalse(self.validate([self.row(d='2024-02', s='')])[2])
+
+    def test_undated_catalog_requires_source_and_uncertainty(self):
+        self.assertFalse(self.validate([self.row(d=None, verification='unverified')])[2])
+        self.assertTrue(self.validate([self.row(d=None)])[2])
+        self.assertTrue(self.validate([self.row(d=None, s='', verification='unverified')])[2])
+
+    def test_unknown_date_does_not_accept_falsy_non_dates(self):
+        for value in ([], {}, 0, False, '', 123, True):
+            with self.subTest(value=value):
+                self.assertTrue(self.validate([self.row(d=value, verification='unverified')])[2])
+
+    def test_legacy_aliases_preserved_and_validated(self):
+        _, models, errors, _ = self.validate([self.row(aliases=['Old combined model'])])
+        self.assertFalse(errors)
+        self.assertEqual(models[0]['aliases'], ['Old combined model'])
+        self.assertTrue(self.validate([self.row(aliases='Not an array')])[2])
+
+    def test_milestones_have_precise_dates_and_sources(self):
+        event = dict(d='2026-09-30', n='API 正式开放', s='https://example.org/ga')
+        self.assertFalse(self.validate([self.row(events=[event])])[2])
+        for change in ({'d':'2026-09'}, {'d':'2026-10-01'}, {'s':'javascript:alert(1)'}, {'s':123}, {'n':''}, {'n':123}):
+            self.assertTrue(self.validate([self.row(events=[dict(event, **change)])])[2])
 
 
 if __name__ == '__main__':

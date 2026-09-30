@@ -25,6 +25,7 @@
   --t-open: #eda100;
   --t-media: #e87ba4;
   --t-code: #008300;
+  --t-specialized: #8556c7;
   --fill: 26%;
   --fill-hover: 46%;
   --label-w: 168px;
@@ -51,6 +52,7 @@
     --t-open: #c98500;
     --t-media: #d55181;
     --t-code: #008300;
+  --t-specialized: #8556c7;
     --fill: 34%;
     --fill-hover: 58%;
   }
@@ -73,6 +75,7 @@
   --t-open: #c98500;
   --t-media: #d55181;
   --t-code: #008300;
+  --t-specialized: #8556c7;
   --fill: 34%;
   --fill-hover: 58%;
 }
@@ -322,29 +325,40 @@ button:focus-visible, input:focus-visible, .bar:focus-visible, summary:focus-vis
 .bar {
   position: absolute; top: 3px;
   height: calc(var(--lane-h) - 6px);
-  border-radius: 2px 4px 4px 2px;
-  background: color-mix(in oklab, var(--c) var(--fill), var(--surface));
-  border-left: 3px solid var(--c);
   color: var(--ink);
   font-size: 11.5px; font-weight: 500;
   line-height: calc(var(--lane-h) - 6px);
-  padding: 0 5px 0 4px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap;
   cursor: default;
-  transition: background-color 120ms, opacity 120ms;
+  transition: opacity 120ms;
 }
-.bar.ongoing {
+.bar-fill {
+  position: absolute; inset: 0;
+  border-radius: 2px 4px 4px 2px;
+  background: color-mix(in oklab, var(--c) var(--fill), var(--surface));
+  border-left: 3px solid var(--c);
+}
+.bar-label { position: relative; display: inline-block; margin-left: 7px; width: max-content; }
+.bar.short .bar-label { background: var(--surface); border-radius: 2px; padding-inline: 2px; }
+.bar.ongoing .bar-fill {
   border-radius: 2px 0 0 2px;
   -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 18px), rgba(0,0,0,0.35));
           mask-image: linear-gradient(90deg, #000 calc(100% - 18px), rgba(0,0,0,0.35));
 }
-.bar.tiny { color: transparent; padding: 0; }
-.bar:hover, .bar:focus-visible, .bar.hl {
+.bar:hover .bar-fill, .bar:focus-visible .bar-fill, .bar.hl .bar-fill {
   background: color-mix(in oklab, var(--c) var(--fill-hover), var(--surface));
-  z-index: 2;
 }
-.bar.unverified { border: 1px dashed var(--muted); opacity: .65; }
+.bar:hover, .bar:focus-visible { z-index: 2; }
+.bar.unverified .bar-fill { border: 1px dashed var(--muted); }
+.bar.unverified { opacity: .65; }
 .bar.dim { opacity: 0.13; }
+.filter-status { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--ink-2); }
+.filter-status button { font: inherit; color: var(--t-flagship); border: 1px solid var(--grid-strong); border-radius: 5px; background: var(--surface); padding: 3px 8px; cursor: pointer; }
+.pending-dates { border: 1px dashed var(--grid-strong); border-radius: 8px; padding: 12px 16px; background: var(--surface); }
+.pending-dates h2 { font-size: 14px; margin: 0 0 4px; }
+.pending-dates p { color: var(--ink-2); font-size: 12px; margin: 0 0 8px; }
+.pending-dates ul { padding-left: 20px; margin: 0; }
+.pending-dates li { margin: 4px 0; }
 a.source-link { color: var(--t-flagship); text-underline-offset: 3px; }
 .verification-note { color: var(--muted); font-size: 11px; }
 
@@ -456,7 +470,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     <div>
       <div class="eyebrow">AI Model Timeline · 2018 — <span id="yr-end">2026</span></div>
       <h1>大模型编年图</h1>
-      <p class="lede">横轴是时间，纵轴是公司。每家公司按产品系列拆成多条轨道，每一格是一个模型：从它发布那天开始，到同系列下一代发布为止。并行产品分别展示；最右端渐隐的格子表示截至核验日收录的最新版本。</p>
+      <p class="lede">横轴是时间，纵轴是公司。每家公司按产品系列拆成多条轨道，每一格是一条模型或命名版本记录：从首次公开那天开始，到同系列下一代发布为止。并行产品分别展示；公告、预览、API 上线和正式开放的差别见备注与来源。</p>
     </div>
     <div class="stats" id="stats"></div>
   </header>
@@ -503,7 +517,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
             <button type="button" data-v="svg" aria-pressed="false">SVG 矢量</button>
           </div>
         </div>
-        <p class="exp-hint" id="exp-hint">导出的是完整大图：所有公司和系列全部展开，时间轴按每天 5 像素绘制，模型名尽量完整显示。按当前的地区、类型和搜索条件导出，配色跟随当前主题。SVG 可以无限放大。</p>
+        <p class="exp-hint" id="exp-hint">按当前的地区、类型和搜索条件导出，所有匹配名称完整显示；日期不确定的记录列在图片末尾。PNG 会按画布上限缩小，SVG 可以无限放大。</p>
         <button type="button" class="btn-primary" id="exp-go">生成并保存</button>
         <p class="exp-status" id="exp-status" role="status" aria-live="polite"></p>
       </div>
@@ -517,7 +531,9 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     </div>
   </div>
 
-  <div class="frame">
+  <div class="filter-status" aria-live="polite"><span id="filter-count"></span><button type="button" id="reset-filters" hidden>显示全部模型</button><a class="source-link" id="pending-jump" href="#pending-dates" hidden>查看日期待核验目录</a></div>
+
+  <div class="frame" id="timeline-frame">
     <div class="tl" id="tl">
       <div class="tl-inner" id="inner">
         <div class="axis">
@@ -532,8 +548,8 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   </div>
 
   <div class="foot-note">
-    <span>数据截至 <b id="asof"></b>，按公开发布（或首次开放使用）日期计。</span>
-    <span>格子长度 = 在该系列中作为最新版的时长，不代表模型下线。虚线表示待核验记录，不参与已核验版本的接替。</span>
+    <span>数据截至 <b id="asof"></b>。日期区分公告、研究、预览及开放使用，具体阶段见备注与来源。</span>
+    <span>格子长度 = 在该系列中作为最新版的时长，不代表模型下线。短条旁的名称不改变时间长度；名称重叠时分行。虚线表示待核验记录，不参与已核验版本的接替。</span>
     <span id="source-summary"></span>
     <span>缩放：<kbd>Ctrl</kbd> + 滚轮，或上方 ＋ / − 按钮。</span>
   </div>
@@ -546,6 +562,12 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
         <tbody id="tbody"></tbody>
       </table>
     </div>
+  </details>
+  <section class="pending-dates" id="pending-dates" hidden><h2>日期待核验的模型</h2><p>以下模型已收录；没有精确到日的依据，暂不放到时间轴。官方目录证明名称，不等于确认发布日期。</p><ul id="pending-list"></ul></section>
+  <details class="table-view" id="coverage-view">
+    <summary>覆盖范围与核验进度</summary>
+    <div style="padding: 0 16px 12px; font-size: 12px; color: var(--ink-2)">收录公开命名的模型家族、并行变体与命名版本；数量不等于独立训练模型数。API 别名可搜索，量化格式、推理档位和用户微调不重复计为模型。尚未核实的日期与历史来源缺口明确保留，不宣称全球无遗漏。<a class="source-link" href="https://github.com/wenhaoquestion/AI-Model-Timeline/blob/main/docs/audit-2026-09-29.md" target="_blank" rel="noopener noreferrer">查看逐公司核验范围与改动清单</a></div>
+    <div class="table-wrap"><table><thead><tr><th>公司</th><th>记录数</th><th>附核验来源</th><th>待核验</th><th>历史待补来源</th><th>未定日期</th></tr></thead><tbody id="coverage-body"></tbody></table></div>
   </details>
 </div>
 
@@ -564,9 +586,10 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     { k: "flagship",  name: "旗舰 / 通用" },
     { k: "reasoning", name: "推理" },
     { k: "small",     name: "轻量 / 快速" },
-    { k: "open",      name: "开源权重" },
+    { k: "open",      name: "开放权重" },
     { k: "media",     name: "图像 / 视频 / 语音" },
-    { k: "code",      name: "代码 / 专项" }
+    { k: "code",      name: "代码 / 形式证明" },
+    { k: "specialized", name: "嵌入 / 安全 / 专项" }
   ];
   var TYPE_NAME = {};
   TYPES.forEach(function (t) { TYPE_NAME[t.k] = t.name; });
@@ -598,12 +621,14 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   function dayOf(ms) { return (ms - T0) / DAY; }
 
   // ---------- model the data ----------
-  var items = DATA.filter(function (x) { return CO[x.c] && x.d && parse(x.d) >= T0; }).map(function (x, i) {
-    return { id: i, c: x.c, lane: x.lane || "其他", m: x.m, t: TYPE_NAME[x.t] ? x.t : "flagship", s: parse(x.d), ds: x.d, n: x.n || "", source: x.s || "", unverified: x.verification === "unverified", endExplicit: x.end ? parse(x.end) : null };
+  var items = DATA.filter(function (x) { return CO[x.c] && (!x.d || parse(x.d) >= T0); }).map(function (x, i) {
+    var exact = /^\d{4}-\d{2}-\d{2}$/.test(x.d || "");
+    return { id: i, c: x.c, lane: x.lane || "其他", m: x.m, aliases: x.aliases || [], events: x.events || [], t: TYPE_NAME[x.t] ? x.t : "flagship", s: exact ? parse(x.d) : null, ds: x.d || "", n: x.n || "", source: x.s || "", unverified: x.verification === "unverified", endExplicit: x.end ? parse(x.end) : null };
   });
 
   var byCo = {};
   items.forEach(function (it) {
+    if (it.s === null) return;
     (byCo[it.c] = byCo[it.c] || {});
     (byCo[it.c][it.lane] = byCo[it.c][it.lane] || []).push(it);
   });
@@ -667,6 +692,14 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   var sourcedCount = items.filter(function (it) { return it.source && !it.unverified; }).length;
   var unverifiedCount = items.filter(function (it) { return it.unverified; }).length;
   $("source-summary").textContent = sourcedCount + " 条附核验来源 · " + unverifiedCount + " 条待核验 · 其余为历史记录";
+  COMPANIES.forEach(function (co) {
+    var rs = items.filter(function (it) { return it.c === co.k; });
+    var tr = document.createElement("tr");
+    [co.name, rs.length, rs.filter(function (it) { return it.source && !it.unverified; }).length, rs.filter(function (it) { return it.unverified; }).length, rs.filter(function (it) { return !it.source && !it.unverified; }).length, rs.filter(function (it) { return it.s === null; }).length].forEach(function (value) {
+      var td = document.createElement("td"); td.textContent = value; tr.appendChild(td);
+    });
+    $("coverage-body").appendChild(tr);
+  });
 
   function labelW() {
     return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--label-w")) || 168;
@@ -675,10 +708,10 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   // ---------- stats ----------
   (function () {
     var years = {};
-    items.forEach(function (it) { var y = new Date(it.s).getUTCFullYear(); years[y] = (years[y] || 0) + 1; });
+    items.forEach(function (it) { if (it.s === null) return; var y = new Date(it.s).getUTCFullYear(); years[y] = (years[y] || 0) + 1; });
     var peak = Object.keys(years).sort(function (a, b) { return years[b] - years[a]; })[0];
     var s = $("stats");
-    [[items.length, "个模型"], [structure.length, "家公司"], [peak ? peak : "—", "发布最密集 · " + (years[peak] || 0) + " 个"]].forEach(function (p) {
+    [[items.length, "条模型 / 版本记录"], [COMPANIES.length, "家公司"], [peak ? peak : "—", "发布最密集 · " + (years[peak] || 0) + " 条"]].forEach(function (p) {
       var d = document.createElement("div"); d.className = "stat";
       var b = document.createElement("b"); b.textContent = p[0];
       var sp = document.createElement("span"); sp.textContent = p[1];
@@ -714,6 +747,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   var bars = [];
   var coEls = [];
   var tracks = [];
+  var laneEls = [];
   structure.forEach(function (g) {
     var co = document.createElement("section"); co.className = "co"; co.dataset.cn = g.co.cn ? "1" : "0";
     var head = document.createElement("div"); head.className = "co-head";
@@ -727,26 +761,40 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
 
     g.rows.forEach(function (row) {
       var lane = document.createElement("div"); lane.className = "lane";
-      var ll = document.createElement("div"); ll.className = "lane-label"; ll.textContent = row.name; ll.title = row.name;
+      var ll = document.createElement("div"); ll.className = "lane-label"; ll.textContent = row.lane; ll.title = row.lane;
       var tr = document.createElement("div"); tr.className = "lane-track"; tracks.push(tr);
       row.items.forEach(function (it) {
         var b = document.createElement("div");
         b.className = "bar" + (it.ongoing ? " ongoing" : "") + (it.unverified ? " unverified" : "");
         b.tabIndex = 0;
-        b.textContent = it.m;
+        var fill = document.createElement("span"); fill.className = "bar-fill"; fill.setAttribute("aria-hidden", "true");
+        var label = document.createElement("span"); label.className = "bar-label"; label.textContent = it.m;
+        b.appendChild(fill); b.appendChild(label); b._label = label;
         b.style.setProperty("--c", "var(--t-" + it.t + ")");
         b.setAttribute("aria-label", g.co.name + " " + it.m + "，" + it.ds + " 发布，" + (it.ongoing ? "至今 " : "在位 ") + it.days + " 天");
         b._it = it; it.el = b;
         bars.push(b);
         tr.appendChild(b);
       });
-      lane.appendChild(ll); lane.appendChild(tr); co.appendChild(lane);
+      lane.appendChild(ll); lane.appendChild(tr); co.appendChild(lane); laneEls.push(lane);
     });
     body.appendChild(co);
     coEls.push(co);
   });
 
   // ---------- layout (depends on zoom) ----------
+  // Keep exact time widths while giving every name room, including day-zero launches.
+  // The same packing is used on screen and in PNG/SVG exports.
+  function packLabels(entries) {
+    var ends = [], slots = [];
+    entries.forEach(function (entry) {
+      var slot = 0;
+      while (slot < ends.length && ends[slot] > entry.x) slot++;
+      ends[slot] = entry.x + entry.width + 8;
+      slots.push(slot);
+    });
+    return { slots: slots, count: ends.length };
+  }
   var hoverLine = document.createElement("div"); hoverLine.className = "gl hover"; hoverLine.hidden = true;
   var hoverChip = document.createElement("div"); hoverChip.className = "hover-chip"; hoverChip.hidden = true;
 
@@ -754,10 +802,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     var ppd = state.ppd;
     var W = Math.round(SPAN * ppd);
     var lw = labelW();
-    inner.style.width = (lw + W) + "px";
-    axis.style.width = W + "px";
-    tracks.forEach(function (t) { t.style.width = W + "px"; });
-    grid.style.width = W + "px";
+    var lh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--lane-h")) || 26;
 
     bars.forEach(function (b) {
       var it = b._it;
@@ -766,8 +811,25 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       b._x = x; b._w = w;
       b.style.left = x + "px";
       b.style.width = w + "px";
-      b.classList.toggle("tiny", w < 26);
+      b._label.style.textIndent = "";
+      b.classList.remove("short");
+      var labelWidth = b._label.getBoundingClientRect().width + 14;
+      b._labelW = labelWidth;
+      b.classList.toggle("short", w < labelWidth);
+      b._visualW = Math.max(w, labelWidth + 4);
+      W = Math.max(W, Math.ceil(x + b._visualW + 20));
     });
+    laneEls.forEach(function (lane) {
+      if (lane.hidden) return;
+      var rowBars = Array.from(lane.querySelectorAll(".bar"));
+      var packed = packLabels(rowBars.map(function (b) { return { x: b._x, width: b._visualW }; }));
+      rowBars.forEach(function (b, i) { b.style.top = (3 + packed.slots[i] * lh) + "px"; });
+      lane.style.height = (Math.max(1, packed.count) * lh) + "px";
+    });
+    inner.style.width = (lw + W) + "px";
+    axis.style.width = W + "px";
+    tracks.forEach(function (t) { t.style.width = W + "px"; });
+    grid.style.width = W + "px";
 
     // axis + gridlines
     axis.textContent = ""; grid.textContent = "";
@@ -799,8 +861,8 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   function pinLabels() {
     var sl = tl.scrollLeft;
     bars.forEach(function (b) {
-      var ind = (b._x < sl && b._x + b._w > sl) ? Math.min(sl - b._x, b._w - 60) : 0;
-      b.style.textIndent = ind > 0 ? ind + "px" : "";
+      var ind = (b._x < sl && b._x + b._w > sl) ? Math.min(sl - b._x, b._w - b._labelW) : 0;
+      b._label.style.textIndent = ind > 0 && !b.classList.contains("short") ? ind + "px" : "";
     });
   }
   var pinRaf = 0;
@@ -856,22 +918,42 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   function regionOk(isCn) {
     return state.region === "all" || (state.region === "cn") === isCn;
   }
+  function searchKey(text) { return String(text).normalize("NFKC").toLowerCase().replace(/[\s._\/\-‐‑–—]/g, ""); }
   function matchQ(it) {
     if (!state.q) return true;
-    var q = state.q;
-    return it.m.toLowerCase().indexOf(q) >= 0 || it.lane.toLowerCase().indexOf(q) >= 0 || CO[it.c].name.toLowerCase().indexOf(q) >= 0 || CO[it.c].sub.toLowerCase().indexOf(q) >= 0;
+    var q = searchKey(state.q);
+    return [it.m, it.lane, it.c, CO[it.c].name, CO[it.c].sub].some(function (v) { return searchKey(v).indexOf(q) >= 0; }) || it.aliases.some(function (v) { return searchKey(v) === q; });
   }
   function visible(it) { return state.types[it.t] && matchQ(it) && regionOk(CO[it.c].cn); }
   function applyFilters() {
-    coEls.forEach(function (el) { el.hidden = !regionOk(el.dataset.cn === "1"); });
     $("region").querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.r === state.region)); });
     bars.forEach(function (b) {
       var on = state.types[b._it.t] && matchQ(b._it);
       b.classList.toggle("dim", !on);
       b.tabIndex = on ? 0 : -1;
     });
+    laneEls.forEach(function (lane) {
+      lane.hidden = !Array.from(lane.querySelectorAll(".bar")).some(function (b) { return visible(b._it); });
+    });
+    coEls.forEach(function (el) {
+      el.hidden = !regionOk(el.dataset.cn === "1") || !Array.from(el.querySelectorAll(".lane")).some(function (lane) { return !lane.hidden; });
+    });
+    var count = items.filter(visible).length;
+    var pending = items.filter(function (it) { return visible(it) && it.s === null; });
+    $("filter-count").textContent = "显示 " + count + " / " + items.length + " 条记录" + (pending.length ? " · 其中 " + pending.length + " 个日期待核验，见目录" : "") + (state.q ? " · 搜索：“" + $("q").value.trim() + "”" : "") + (count ? "" : " · 当前条件无匹配结果");
+    $("pending-jump").hidden = !pending.length;
+    if (state.q && pending.length === count && count > 0) $("timeline-frame").before($("pending-dates"));
+    else $("tv").after($("pending-dates"));
+    $("reset-filters").hidden = !state.q && state.region === "all" && TYPES.every(function (t) { return state.types[t.k]; });
+    layout();
     renderTable();
   }
+  $("reset-filters").addEventListener("click", function () {
+    clearTimeout(qTimer); state.q = ""; state.region = "all"; $("q").value = "";
+    TYPES.forEach(function (t) { state.types[t.k] = true; });
+    legend.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "true"); });
+    persist(); applyFilters(); tl.scrollTop = 0;
+  });
   $("region").addEventListener("click", function (e) {
     var b = e.target.closest("button"); if (!b) return;
     state.region = b.dataset.r; persist(); applyFilters();
@@ -888,6 +970,9 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
         if (first) {
           var x = dayOf(first._it.s) * state.ppd;
           if (x < tl.scrollLeft || x > tl.scrollLeft + trackW() - 60) tl.scrollLeft = x - 40;
+          var br = first.getBoundingClientRect(), tr = tl.getBoundingClientRect();
+          tl.scrollTop += br.top - tr.top - 64;
+          pinLabels();
         }
       }
     }, 120);
@@ -896,13 +981,13 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   // ---------- table ----------
   function renderTable() {
     var tb = $("tbody"); tb.textContent = "";
-    var rows = items.filter(visible).sort(function (a, b) { return b.s - a.s || a.c.localeCompare(b.c); });
+    var rows = items.filter(visible).sort(function (a, b) { return (b.s || 0) - (a.s || 0) || a.c.localeCompare(b.c); });
     $("tv-count").textContent = rows.length + " 条";
     var frag = document.createDocumentFragment();
     rows.forEach(function (it) {
       var tr = document.createElement("tr");
       function td(text, cls) { var c = document.createElement("td"); if (cls) c.className = cls; c.textContent = text; tr.appendChild(c); return c; }
-      td(it.ds, "date");
+      td(it.ds || "日期待核验", "date");
       td(CO[it.c].name);
       td(it.lane);
       var m = td(it.m); m.style.fontWeight = "600";
@@ -911,8 +996,8 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       tp.appendChild(document.createElement("i"));
       tp.appendChild(document.createTextNode(TYPE_NAME[it.t]));
       tc.appendChild(tp); tr.appendChild(tc);
-      td(it.ongoing ? it.days + "（至今）" : String(it.days), "num");
-      td(it.next ? it.next.m : (it.ongoing ? "—" : "已停更"));
+      td(it.s === null ? "—" : (it.ongoing ? it.days + "（至今）" : String(it.days)), "num");
+      td(it.s === null ? "日期待核验" : (it.next ? it.next.m : (it.ongoing ? "—" : "区间结束")));
       td(it.n, "note");
       var sc = td("", "source");
       if (it.source) {
@@ -925,9 +1010,22 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       var status = document.createElement("span"); status.className = "verification-note";
       status.textContent = it.unverified ? " 待核验" : (it.source ? " 已核验" : "历史记录 · 待补来源");
       sc.appendChild(status);
+      it.events.forEach(function (event) {
+        sc.appendChild(document.createElement("br"));
+        var a = document.createElement("a"); a.className = "source-link"; a.href = event.s; a.target = "_blank"; a.rel = "noopener noreferrer";
+        a.textContent = event.d + " · " + event.n; sc.appendChild(a);
+      });
       frag.appendChild(tr);
     });
     tb.appendChild(frag);
+    var pending = rows.filter(function (it) { return it.s === null; });
+    $("pending-dates").hidden = !pending.length;
+    var ul = $("pending-list"); ul.textContent = "";
+    pending.forEach(function (it) {
+      var li = document.createElement("li"), a = document.createElement("a");
+      a.textContent = CO[it.c].name + " · " + it.m; a.href = it.source; a.className = "source-link"; a.target = "_blank"; a.rel = "noopener noreferrer";
+      li.appendChild(a); li.appendChild(document.createTextNode(" · " + (it.ds ? it.ds + "，具体日期待核验" : "发布日期待核验") + (it.n ? " · " + it.n : ""))); ul.appendChild(li);
+    });
   }
 
   // ---------- tooltip ----------
@@ -950,9 +1048,9 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     row("核验", it.unverified ? "待核验，不作为接替依据" : (it.source ? "官方来源见模型列表" : "历史记录，待补来源"));
     if (it.ongoing) row("状态", "收录最新 · 截至核验日 " + it.days + " 天", true);
     else if (it.next) { row("接替", it.next.m + "（" + it.next.ds + "）"); row("在位", it.days + " 天", true); }
-    else { row("停更", fmt(it.e)); row("在位", it.days + " 天", true); }
+    else { row("区间结束", fmt(it.e)); row("在位", it.days + " 天", true); }
     tip.appendChild(dl);
-    if (it.n) { var n = document.createElement("div"); n.className = "tt-n"; n.textContent = it.n; tip.appendChild(n); }
+    if (it.n || it.events.length) { var n = document.createElement("div"); n.className = "tt-n"; n.textContent = [it.n].concat(it.events.map(function (e) { return e.d + " " + e.n; })).filter(Boolean).join("；"); tip.appendChild(n); }
     tip.hidden = false;
     var r = tip.getBoundingClientRect();
     var x = cx + 14, y = cy + 16;
@@ -974,6 +1072,10 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     showTip(b, Math.max(r.left, tl.getBoundingClientRect().left + labelW()) + 8, r.bottom);
   });
   body.addEventListener("focusout", hideTip);
+  body.addEventListener("click", function (e) {
+    var b = e.target.closest(".bar"); if (!b || b.classList.contains("dim")) return;
+    var r = b.getBoundingClientRect(); showTip(b, r.left + 8, r.bottom);
+  });
   tl.addEventListener("scroll", hideTip, { passive: true });
 
   // crosshair: vertical hairline + date chip that follows the pointer
@@ -1074,14 +1176,32 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     function line(x1, y1, x2, y2, stroke, lw) { ops.push({ k: "l", x1: x1, y1: y1, x2: x2, y2: y2, stroke: stroke, lw: lw || 1 }); }
 
     var groups = [], count = 0, typesUsed = {};
+    var pending = items.filter(function (it) { return it.s === null && visible(it); });
+    pending.forEach(function (it) { typesUsed[it.t] = 1; });
     structure.forEach(function (g) {
       if (!regionOk(g.co.cn)) return;
       var rows = g.rows.map(function (r) {
         return { lane: r.lane, items: r.items.filter(function (it) { return state.types[it.t] && matchQ(it) && (it.e > from || (it.e === it.s && it.s >= from)) && it.s < to; }) };
       }).filter(function (r) { return r.items.length; });
       if (!rows.length) return;
-      rows.forEach(function (r) { count += r.items.length; r.items.forEach(function (it) { typesUsed[it.t] = 1; }); });
-      groups.push({ co: g.co, rows: rows });
+      var packedRows = [];
+      rows.forEach(function (r) {
+        count += r.items.length;
+        var packed = packLabels(r.items.map(function (it) {
+          typesUsed[it.t] = 1;
+          var x = (Math.max(it.s, from) - from) / DAY * ppd;
+          var w = Math.max(3, (Math.min(it.e, to) - Math.max(it.s, from)) / DAY * ppd - 2);
+          mctx.font = fontStr({ s: 12.5, w: 500 });
+          var label = it.m + (it.unverified ? " [待核验]" : "");
+          var visualW = Math.max(w, mctx.measureText(label).width + 16);
+          W = Math.max(W, Math.ceil(x + visualW + 20));
+          return { x: x, width: visualW };
+        }));
+        var subRows = [];
+        r.items.forEach(function (it, i) { (subRows[packed.slots[i]] = subRows[packed.slots[i]] || []).push(it); });
+        subRows.forEach(function (list) { packedRows.push({ lane: r.lane, items: list }); });
+      });
+      groups.push({ co: g.co, rows: packedRows });
     });
 
     var bodyH = 0;
@@ -1090,12 +1210,14 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     var bodyTop = chartTop + AXH;
     var chartBottom = bodyTop + bodyH;
     var totalW = X0 + W + PAD;
-    var totalH = chartBottom + 64 + PAD;
+    var totalH = chartBottom + 64 + PAD + (pending.length ? 48 + pending.length * 22 : 0);
+    count += pending.length;
+    var companyCount = new Set(groups.map(function (g) { return g.co.k; }).concat(pending.map(function (it) { return it.c; }))).size;
 
     rect(0, 0, totalW, totalH, tk.bg);
     // title block
     text(PAD, PAD + 36, "大模型编年图", { s: 36, w: 900, fill: tk.ink });
-    text(PAD, PAD + 66, count + " 个模型 · " + groups.length + " 家公司 · " + fmt(from) + " 至 " + fmt(to) + " · 数据截至 " + TODAY_STR, { s: 15, fill: tk.ink2 });
+    text(PAD, PAD + 66, count + " 条记录 · " + companyCount + " 家公司 · " + fmt(from) + " 至 " + fmt(to) + " · 数据截至 " + TODAY_STR, { s: 15, fill: tk.ink2 });
     var lx = PAD;
     TYPES.forEach(function (ty) {
       if (!typesUsed[ty.k]) return;
@@ -1166,7 +1288,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
           rect(bx, by, bw, BARH, mix(c, tk.surface, tk.fill), 3);
           if (it.s >= from) rect(bx, by, 3, BARH, c);
           if (it.unverified) ops.push({ k: "b", x: bx, y: by, w: bw, h: BARH, stroke: tk.ink2, dash: true });
-          if (bw >= 26) text(bx + 7, by + BARH / 2 + 4.5, fitText(it.m + (it.unverified ? " [待核验]" : ""), bw - 11, { s: 12.5, w: 500 }), { s: 12.5, w: 500, fill: tk.ink });
+          text(bx + 7, by + BARH / 2 + 4.5, it.m + (it.unverified ? " [待核验]" : ""), { s: 12.5, w: 500, fill: tk.ink });
         });
         y += LANEH;
       });
@@ -1186,6 +1308,12 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
 
     text(PAD, chartBottom + 30, "每一格表示一个模型从发布到同系列下一代发布的时长；延伸到“截至”红线的是收录的最新版本。格子长度不代表模型下线。", { s: 13, fill: tk.ink2 });
     text(PAD, chartBottom + 52, "日期按公开发布或首次开放使用计，核验截至 " + TODAY_STR + "；虚线框为待核验记录，不作为已核验版本的接替依据。", { s: 13, fill: tk.muted });
+    if (pending.length) {
+      text(PAD, chartBottom + 92, "日期待核验目录 · 不绘制推测的发布时间", { s: 16, w: 700, fill: tk.ink });
+      pending.forEach(function (it, i) {
+        text(PAD, chartBottom + 119 + i * 22, CO[it.c].name + " · " + it.m + " · " + (it.ds || "日期待核验"), { s: 13, fill: tk.ink2 });
+      });
+    }
 
     return { w: Math.ceil(totalW), h: Math.ceil(totalH), ops: ops, count: count };
   }
@@ -1221,7 +1349,8 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     return c;
   }
   async function renderPng(sc) {
-    var scales = [2, 1.5, 1, 0.7, 0.5];
+    var safeScale = Math.min(2, 31999 / sc.w, 31999 / sc.h, Math.sqrt(119e6 / (sc.w * sc.h)));
+    var scales = [2, 1.5, 1, 0.7, 0.5, Math.min(0.5, safeScale * 0.98)].filter(function (s, i, all) { return all.indexOf(s) === i; });
     for (var i = 0; i < scales.length; i++) {
       var s = scales[i];
       var pw = sc.w * s, ph = sc.h * s;
@@ -1314,6 +1443,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   // ---------- init ----------
   applyFilters();
   PRESETS["2023"](); markPreset("2023");
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   var rT;
   window.addEventListener("resize", function () {
     clearTimeout(rT);

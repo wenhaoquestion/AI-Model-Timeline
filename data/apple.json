@@ -1,0 +1,18 @@
+[
+  {"lane": "端侧 OpenELM", "m": "OpenELM-1.1B", "d": "2024-04", "t": "open", "n": "开放语言模型；首日待核", "s": "https://machinelearning.apple.com/research/openelm", "verification": "unverified"},
+  {"lane": "端侧 OpenELM", "m": "OpenELM-270M", "d": "2024-04", "t": "open", "n": "开放语言模型；首日待核", "s": "https://machinelearning.apple.com/research/openelm", "verification": "unverified"},
+  {"lane": "端侧 OpenELM", "m": "OpenELM-3B", "d": "2024-04", "t": "open", "n": "开放语言模型；首日待核", "s": "https://machinelearning.apple.com/research/openelm", "verification": "unverified"},
+  {"lane": "端侧 OpenELM", "m": "OpenELM-450M", "d": "2024-04", "t": "open", "n": "开放语言模型；首日待核", "s": "https://machinelearning.apple.com/research/openelm", "verification": "unverified"},
+  {"lane": "端侧 AFM", "m": "Apple On-Device (2024)", "d": "2024-06-10", "t": "small", "n": "WWDC24公开，约3B参数", "s": "https://machinelearning.apple.com/research/introducing-apple-foundation-models"},
+  {"lane": "端侧 AFM", "m": "Apple On-Device (2025)", "d": "2025-06-09", "t": "small", "n": "第二代端侧基础模型", "s": "https://machinelearning.apple.com/research/apple-foundation-models-2025-updates"},
+  {"lane": "端侧 AFM", "m": "AFM 3 Core", "d": "2026-06-08", "t": "small", "n": "3B稠密端侧模型", "s": "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"},
+  {"lane": "云端 AFM", "m": "Apple Server (2024)", "d": "2024-06-10", "t": "flagship", "n": "WWDC24公开的云端模型", "s": "https://machinelearning.apple.com/research/introducing-apple-foundation-models"},
+  {"lane": "云端 AFM", "m": "Apple Server (2025)", "d": "2025-06-09", "t": "flagship", "n": "第二代PT-MoE云端模型", "s": "https://machinelearning.apple.com/research/apple-foundation-models-2025-updates"},
+  {"lane": "云端 AFM", "m": "AFM 3 Cloud", "d": "2026-06-08", "t": "flagship", "n": "高效云端工作模型", "s": "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"},
+  {"lane": "端侧 AFM Advanced", "m": "AFM 3 Core Advanced", "d": "2026-06-08", "t": "small", "n": "20B稀疏多模态端侧模型", "s": "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"},
+  {"lane": "云端 AFM Pro", "m": "AFM 3 Cloud Pro", "d": "2026-06-08", "t": "flagship", "n": "云端推理与智能体模型", "s": "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"},
+  {"lane": "图像 ADM", "m": "ADM 3 Cloud (Image)", "d": "2026-06-08", "t": "media", "n": "云端图像生成与编辑", "s": "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"},
+  {"lane": "视觉 FastVLM", "m": "FastVLM-0.5B", "d": null, "t": "open", "n": "开放视觉语言模型；首发日待核", "s": "https://github.com/apple/ml-fastvlm", "verification": "unverified"},
+  {"lane": "视觉 FastVLM", "m": "FastVLM-1.5B", "d": null, "t": "open", "n": "开放视觉语言模型；首发日待核", "s": "https://github.com/apple/ml-fastvlm", "verification": "unverified"},
+  {"lane": "视觉 FastVLM", "m": "FastVLM-7B", "d": null, "t": "open", "n": "开放视觉语言模型；首发日待核", "s": "https://github.com/apple/ml-fastvlm", "verification": "unverified"}
+]

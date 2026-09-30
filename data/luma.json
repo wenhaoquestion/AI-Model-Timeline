@@ -1,0 +1,14 @@
+[
+  {"lane": "视频 Ray", "m": "Ray2", "d": "2025-01-15", "t": "media", "n": "新版视频生成模型", "s": "https://lumalabs.ai/changelog/introducing-ray2"},
+  {"lane": "视频 Ray", "m": "Ray3", "d": "2025-09-18", "t": "media", "n": "推理视频；原生HDR", "s": "https://lumalabs.ai/news/ray3"},
+  {"lane": "视频 Ray", "m": "Ray3.14", "d": "2026-01", "t": "media", "n": "1/23指南、1/26公告；首日待核", "s": "https://lumalabs.ai/news/ray3_14", "verification": "unverified"},
+  {"lane": "视频 Ray", "m": "Ray3.2", "d": "2026-06-09", "t": "media", "n": "视频模型与API同步发布", "s": "https://lumalabs.ai/news/introducing-ray-3-2"},
+  {"lane": "视频 Ray", "m": "Ray1", "d": null, "t": "media", "n": "历史视频模型；首发日待核", "s": "https://lumalabs.ai/changelog/introducing-ray2", "verification": "unverified"},
+  {"lane": "视频 Ray", "m": "Ray1.6", "d": null, "t": "media", "n": "历史视频模型；首发日待核", "s": "https://lumalabs.ai/learning-hub/dream-machine-guide-ray2", "verification": "unverified"},
+  {"lane": "视频 Ray Flash", "m": "Ray2 Flash", "d": null, "t": "media", "n": "快速视频模型；首发日待核", "s": "https://lumalabs.ai/learning-hub/dream-machine-guide-ray2", "verification": "unverified"},
+  {"lane": "视频 Ray Modify", "m": "Ray3 Modify", "d": "2025-12-18", "t": "media", "n": "角色参考与视频修改", "s": "https://lumalabs.ai/news"},
+  {"lane": "图像 Photon", "m": "Photon 1", "d": null, "t": "media", "n": "历史图像模型；首发日待核", "s": "https://docs.lumalabs.ai/docs/image-generation", "verification": "unverified"},
+  {"lane": "图像 Photon", "m": "Photon Flash 1", "d": null, "t": "media", "n": "历史图像模型；首发日待核", "s": "https://docs.lumalabs.ai/docs/image-generation", "verification": "unverified"},
+  {"lane": "多模态 UNI", "m": "UNI-1", "d": "2026-04", "t": "media", "n": "5/5公告称上月发布；日待核", "s": "https://lumalabs.ai/news/uni-1-1-api", "verification": "unverified"},
+  {"lane": "多模态 UNI", "m": "UNI-1.1", "d": "2026-05-05", "t": "media", "n": "图像生成编辑API首次公告", "s": "https://lumalabs.ai/news/uni-1-1-api"}
+]

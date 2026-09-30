@@ -1,0 +1,16 @@
+[
+  {"m": "Jamba", "d": "2024-03-28", "lane": "Jamba Base", "t": "open", "s": "https://www.ai21.com/blog/announcing-jamba/", "n": "基础模型开放权重；后来的Instruct不是同日发布"},
+  {"m": "Jamba 1.5 Mini", "d": "2024-08-22", "lane": "Jamba Mini", "t": "open", "s": "https://www.ai21.com/blog/announcing-jamba-model-family/", "n": "Mini/Large并行轨"},
+  {"m": "Jamba 1.6 Mini", "d": "2025-03-06", "lane": "Jamba Mini", "t": "open", "s": "https://www.ai21.com/blog/introducing-jamba-1-6/", "n": ""},
+  {"m": "Jamba2 Mini", "d": "2026-01-08", "lane": "Jamba Mini", "t": "open", "s": "https://www.ai21.com/blog/introducing-jamba2/", "n": "3B/Mini并行轨"},
+  {"m": "Jamba 1.5 Large", "d": "2024-08-22", "lane": "Jamba Large", "t": "open", "s": "https://www.ai21.com/blog/announcing-jamba-model-family/", "n": "Mini/Large并行轨"},
+  {"m": "Jamba 1.6 Large", "d": "2025-03-06", "lane": "Jamba Large", "t": "open", "s": "https://www.ai21.com/blog/introducing-jamba-1-6/", "n": ""},
+  {"m": "Jamba2 3B", "d": "2026-01-08", "lane": "Jamba 3B", "t": "open", "s": "https://www.ai21.com/blog/introducing-jamba2/", "n": "3B/Mini并行轨"},
+  {"m": "Jurassic-2 Large", "d": "2023-03-09", "lane": "Jurassic Large", "t": "flagship", "s": "https://www.ai21.com/blog/introducing-j2/", "n": "并行命名版本", "aliases": ["Jurassic-2 Light"]},
+  {"m": "Jurassic-2 Grande", "d": "2023-03-09", "lane": "Jurassic Grande", "t": "flagship", "s": "https://www.ai21.com/blog/introducing-j2/", "n": "", "aliases": ["Jurassic-2 Mid"]},
+  {"m": "Jurassic-2 Jumbo", "d": "2023-03-09", "lane": "Jurassic Jumbo", "t": "flagship", "s": "https://www.ai21.com/blog/introducing-j2/", "n": "", "aliases": ["Jurassic-2 Ultra"]},
+  {"m": "Jurassic-2 Grande Instruct", "d": "2023-03-09", "lane": "Jurassic Grande Instruct", "t": "flagship", "s": "https://www.ai21.com/blog/introducing-j2/", "n": "并行命名版本", "aliases": ["Jurassic-2 Mid Instruct"]},
+  {"m": "Jurassic-2 Jumbo Instruct", "d": "2023-03-09", "lane": "Jurassic Jumbo Instruct", "t": "flagship", "s": "https://www.ai21.com/blog/introducing-j2/", "n": "并行命名版本", "aliases": ["Jurassic-2 Ultra Instruct"]},
+  {"m": "Jamba-Instruct", "d": null, "lane": "Jamba Instruct", "t": "open", "s": "https://www.ai21.com/blog/announcing-jamba/", "n": "官方目录确认名称，首发日期待核验", "verification": "unverified"},
+  {"m": "Jurassic-1", "d": null, "lane": "Jurassic", "t": "flagship", "s": "https://www.ai21.com/blog/introducing-j2/", "n": "官方目录确认名称，首发日期待核验", "verification": "unverified"}
+]

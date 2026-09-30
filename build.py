@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
-TYPES = {"flagship", "reasoning", "small", "open", "media", "code"}
+TYPES = {"flagship", "reasoning", "small", "open", "media", "code", "specialized"}
 
 
 def parse_date(s):
@@ -60,12 +60,16 @@ def load(as_of=None):
             if not x.get("m") or not x.get("lane"):
                 errors.append(f"{where}: 缺少 m 或 lane")
                 continue
-            try:
-                d = parse_date(x.get("d", ""))
-            except (ValueError, TypeError):
-                errors.append(f"{where}: 日期格式应为 YYYY-MM-DD，实际是 {x.get('d')!r}")
-                continue
-            if as_of and d > parse_date(as_of):
+            d = None
+            if x.get("d") is not None:
+                try:
+                    d = parse_date(x["d"])
+                except (ValueError, TypeError):
+                    errors.append(f"{where}: 日期格式应为 YYYY-MM-DD，实际是 {x.get('d')!r}")
+                    continue
+            elif not x.get("s") or x.get("verification") != "unverified":
+                errors.append(f"{where}: 日期未知时须有官方身份来源并标记 unverified")
+            if as_of and d and d > parse_date(as_of):
                 errors.append(f"{where}: 发布日期晚于数据截至日期 {as_of}")
             source = x.get("s")
             if source:
@@ -75,17 +79,33 @@ def load(as_of=None):
                     url = None
                 if not url or url.scheme != "https" or not url.netloc or url.username or url.password:
                     errors.append(f"{where}: s 必须是无凭证的 HTTPS 来源链接")
-                if len(x["d"]) != 10 and x.get("verification") != "unverified":
+                if len(x.get("d") or "") != 10 and x.get("verification") != "unverified":
                     errors.append(f"{where}: 已核验来源的记录须精确到日")
             if x.get("verification") not in (None, "unverified"):
                 errors.append(f"{where}: verification 仅支持 unverified")
-            if d.year >= 2026 and not source and x.get("verification") != "unverified":
+            if "aliases" in x and (not isinstance(x["aliases"], list) or not all(isinstance(a, str) and a.strip() for a in x["aliases"])):
+                errors.append(f"{where}: aliases 须为非空字符串数组")
+            events = x.get("events", [])
+            if not isinstance(events, list):
+                errors.append(f"{where}: events 须为数组")
+                events = []
+            for event in events:
+                try:
+                    ed = parse_date(event["d"])
+                    if not isinstance(event.get("s"), str) or not isinstance(event.get("n"), str):
+                        raise ValueError("无效里程碑字段")
+                    eu = urlsplit(event["s"])
+                    if len(event["d"]) != 10 or not event.get("n") or eu.scheme != "https" or not eu.netloc or eu.username or eu.password or (as_of and ed > parse_date(as_of)):
+                        raise ValueError("无效里程碑")
+                except (ValueError, TypeError, KeyError):
+                    errors.append(f"{where}: 里程碑须含截至日前的精确日期、说明和 HTTPS 来源")
+            if d and d.year >= 2026 and not source and x.get("verification") != "unverified":
                 errors.append(f"{where}: 2026 年及以后的记录须附来源 s 或标记待核验")
             if x.get("t") not in TYPES:
                 errors.append(f"{where}: 类型 t 必须是 {sorted(TYPES)} 之一")
             if x.get("end"):
                 try:
-                    if parse_date(x["end"]) < d:
+                    if not d or parse_date(x["end"]) < d:
                         errors.append(f"{where}: end 早于发布日期")
                 except ValueError:
                     errors.append(f"{where}: end 日期格式错误")
@@ -94,13 +114,14 @@ def load(as_of=None):
                 errors.append(f"{where}: 模型名重复")
             seen.add(name)
             prev = last_by_lane.get(x["lane"])
-            if prev and d < prev:
+            if prev and d and d < prev:
                 warnings.append(f"{where}: 在系列「{x['lane']}」中早于上一条（页面会自动排序）")
-            last_by_lane[x["lane"]] = d
+            if d:
+                last_by_lane[x["lane"]] = d
             if len(x.get("n", "")) > 30:
                 warnings.append(f"{where}: 备注超过 30 字，提示框里会显得拥挤")
-            row = {"c": k, "lane": x["lane"], "m": x["m"], "d": x["d"], "t": x["t"], "n": x.get("n", "")}
-            for field in ("end", "s", "verification"):
+            row = {"c": k, "lane": x["lane"], "m": x["m"], "d": x.get("d"), "t": x["t"], "n": x.get("n", "")}
+            for field in ("end", "s", "verification", "aliases", "events"):
                 if x.get(field):
                     row[field] = x[field]
             models.append(row)
@@ -128,7 +149,7 @@ def main():
     counts = {}
     for m in models:
         counts[m["c"]] = counts.get(m["c"], 0) + 1
-    print(f"{len(models)} 个模型，{len(counts)} 家公司，数据截至 {as_of}")
+    print(f"{len(models)} 条模型/版本记录，{len(counts)} 家公司，数据截至 {as_of}")
     sourced = sum(bool(m.get("s")) and m.get("verification") != "unverified" for m in models)
     unverified = sum(m.get("verification") == "unverified" for m in models)
     print(f"{sourced} 条附核验来源，{unverified} 条待核验，其余为历史记录")
