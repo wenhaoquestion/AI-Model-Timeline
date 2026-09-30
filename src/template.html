@@ -343,7 +343,10 @@ button:focus-visible, input:focus-visible, .bar:focus-visible, summary:focus-vis
   background: color-mix(in oklab, var(--c) var(--fill-hover), var(--surface));
   z-index: 2;
 }
+.bar.unverified { border: 1px dashed var(--muted); opacity: .65; }
 .bar.dim { opacity: 0.13; }
+a.source-link { color: var(--t-flagship); text-underline-offset: 3px; }
+.verification-note { color: var(--muted); font-size: 11px; }
 
 .tooltip {
   position: fixed; z-index: 50;
@@ -453,7 +456,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     <div>
       <div class="eyebrow">AI Model Timeline · 2018 — <span id="yr-end">2026</span></div>
       <h1>大模型编年图</h1>
-      <p class="lede">横轴是时间，纵轴是公司。每家公司按产品系列拆成多条轨道，每一格是一个模型：从它发布那天开始，到同系列下一代发布为止。最右端渐隐的格子表示该系列目前的最新版本。</p>
+      <p class="lede">横轴是时间，纵轴是公司。每家公司按产品系列拆成多条轨道，每一格是一个模型：从它发布那天开始，到同系列下一代发布为止。并行产品分别展示；最右端渐隐的格子表示截至核验日收录的最新版本。</p>
     </div>
     <div class="stats" id="stats"></div>
   </header>
@@ -530,7 +533,8 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
 
   <div class="foot-note">
     <span>数据截至 <b id="asof"></b>，按公开发布（或首次开放使用）日期计。</span>
-    <span>格子长度 = 在该系列中作为最新版的时长，不代表模型下线。</span>
+    <span>格子长度 = 在该系列中作为最新版的时长，不代表模型下线。虚线表示待核验记录，不参与已核验版本的接替。</span>
+    <span id="source-summary"></span>
     <span>缩放：<kbd>Ctrl</kbd> + 滚轮，或上方 ＋ / − 按钮。</span>
   </div>
 
@@ -538,7 +542,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     <summary>全部模型列表<span id="tv-count"></span></summary>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>发布日期</th><th>公司</th><th>系列</th><th>模型</th><th>类型</th><th>在位天数</th><th>下一代</th><th>备注</th></tr></thead>
+        <thead><tr><th>发布日期</th><th>公司</th><th>系列</th><th>模型</th><th>类型</th><th>在位天数</th><th>下一代</th><th>备注</th><th>来源 / 核验</th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
@@ -595,7 +599,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
 
   // ---------- model the data ----------
   var items = DATA.filter(function (x) { return CO[x.c] && x.d && parse(x.d) >= T0; }).map(function (x, i) {
-    return { id: i, c: x.c, lane: x.lane || "其他", m: x.m, t: TYPE_NAME[x.t] ? x.t : "flagship", s: parse(x.d), ds: x.d, n: x.n || "", endExplicit: x.end ? parse(x.end) : null };
+    return { id: i, c: x.c, lane: x.lane || "其他", m: x.m, t: TYPE_NAME[x.t] ? x.t : "flagship", s: parse(x.d), ds: x.d, n: x.n || "", source: x.s || "", unverified: x.verification === "unverified", endExplicit: x.end ? parse(x.end) : null };
   });
 
   var byCo = {};
@@ -610,13 +614,15 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
         var nx = list[i + 1];
         // successor on the same day (a paired launch) doesn't end the bar; find the next later one
         var j = i + 1;
-        while (list[j] && list[j].s <= it.s) j++;
+        while (list[j] && (list[j].s <= it.s || (!it.unverified && list[j].unverified))) j++;
         nx = list[j];
         it.next = nx || null;
-        if (it.endExplicit) { it.e = it.endExplicit; it.ongoing = false; }
-        else if (nx) { it.e = nx.s; it.ongoing = false; }
-        else { it.e = TODAY; it.ongoing = true; }
-        it.days = Math.max(1, Math.round((it.e - it.s) / DAY));
+        var nextDate = nx ? nx.s : Infinity;
+        var stopDate = it.endExplicit == null ? Infinity : it.endExplicit;
+        it.e = Math.min(TODAY, nextDate, stopDate);
+        it.ongoing = nextDate > TODAY && stopDate > TODAY;
+        if (stopDate < nextDate) it.next = null;
+        it.days = Math.max(0, Math.round((it.e - it.s) / DAY));
       });
       return { name: ln, items: list, first: list[0].s };
     }).sort(function (a, b) { return a.first - b.first; });
@@ -632,7 +638,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
         var placed = false;
         for (var r = 0; r < rows.length; r++) {
           var last = rows[r][rows[r].length - 1];
-          if (last.e <= it.s) { rows[r].push(it); placed = true; break; }
+          if (last.s < it.s && last.e <= it.s) { rows[r].push(it); placed = true; break; }
         }
         if (!placed) rows.push([it]);
       });
@@ -658,6 +664,9 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
   var $ = function (id) { return document.getElementById(id); };
   var tl = $("tl"), inner = $("inner"), axis = $("axis"), body = $("body"), grid = $("grid"), tip = $("tip");
   $("asof").textContent = TODAY_STR;
+  var sourcedCount = items.filter(function (it) { return it.source && !it.unverified; }).length;
+  var unverifiedCount = items.filter(function (it) { return it.unverified; }).length;
+  $("source-summary").textContent = sourcedCount + " 条附核验来源 · " + unverifiedCount + " 条待核验 · 其余为历史记录";
 
   function labelW() {
     return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--label-w")) || 168;
@@ -722,7 +731,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       var tr = document.createElement("div"); tr.className = "lane-track"; tracks.push(tr);
       row.items.forEach(function (it) {
         var b = document.createElement("div");
-        b.className = "bar" + (it.ongoing ? " ongoing" : "");
+        b.className = "bar" + (it.ongoing ? " ongoing" : "") + (it.unverified ? " unverified" : "");
         b.tabIndex = 0;
         b.textContent = it.m;
         b.style.setProperty("--c", "var(--t-" + it.t + ")");
@@ -781,7 +790,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     }
     var tx = dayOf(TODAY) * ppd;
     var gt = document.createElement("div"); gt.className = "gl today"; gt.style.left = tx + "px"; grid.appendChild(gt);
-    var at = document.createElement("div"); at.className = "axis-today"; at.style.left = tx + "px"; at.textContent = "今天"; axis.appendChild(at);
+    var at = document.createElement("div"); at.className = "axis-today"; at.style.left = tx + "px"; at.textContent = "截至 " + TODAY_STR; axis.appendChild(at);
     grid.appendChild(hoverLine); axis.appendChild(hoverChip);
     pinLabels();
   }
@@ -905,6 +914,17 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       td(it.ongoing ? it.days + "（至今）" : String(it.days), "num");
       td(it.next ? it.next.m : (it.ongoing ? "—" : "已停更"));
       td(it.n, "note");
+      var sc = td("", "source");
+      if (it.source) {
+        var link = document.createElement("a");
+        link.className = "source-link"; link.href = it.source;
+        link.target = "_blank"; link.rel = "noopener noreferrer";
+        link.textContent = "官方来源"; link.setAttribute("aria-label", it.m + " 官方来源");
+        sc.appendChild(link);
+      }
+      var status = document.createElement("span"); status.className = "verification-note";
+      status.textContent = it.unverified ? " 待核验" : (it.source ? " 已核验" : "历史记录 · 待补来源");
+      sc.appendChild(status);
       frag.appendChild(tr);
     });
     tb.appendChild(frag);
@@ -927,7 +947,8 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       dl.appendChild(dt); dl.appendChild(dd);
     }
     row("发布", it.ds, true);
-    if (it.ongoing) row("状态", "当前最新 · 已 " + it.days + " 天", true);
+    row("核验", it.unverified ? "待核验，不作为接替依据" : (it.source ? "官方来源见模型列表" : "历史记录，待补来源"));
+    if (it.ongoing) row("状态", "收录最新 · 截至核验日 " + it.days + " 天", true);
     else if (it.next) { row("接替", it.next.m + "（" + it.next.ds + "）"); row("在位", it.days + " 天", true); }
     else { row("停更", fmt(it.e)); row("在位", it.days + " 天", true); }
     tip.appendChild(dl);
@@ -1056,7 +1077,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
     structure.forEach(function (g) {
       if (!regionOk(g.co.cn)) return;
       var rows = g.rows.map(function (r) {
-        return { lane: r.lane, items: r.items.filter(function (it) { return state.types[it.t] && matchQ(it) && it.e > from && it.s < to; }) };
+        return { lane: r.lane, items: r.items.filter(function (it) { return state.types[it.t] && matchQ(it) && (it.e > from || (it.e === it.s && it.s >= from)) && it.s < to; }) };
       }).filter(function (r) { return r.items.length; });
       if (!rows.length) return;
       rows.forEach(function (r) { count += r.items.length; r.items.forEach(function (it) { typesUsed[it.t] = 1; }); });
@@ -1144,7 +1165,8 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
           var c = tk.types[it.t];
           rect(bx, by, bw, BARH, mix(c, tk.surface, tk.fill), 3);
           if (it.s >= from) rect(bx, by, 3, BARH, c);
-          if (bw >= 26) text(bx + 7, by + BARH / 2 + 4.5, fitText(it.m, bw - 11, { s: 12.5, w: 500 }), { s: 12.5, w: 500, fill: tk.ink });
+          if (it.unverified) ops.push({ k: "b", x: bx, y: by, w: bw, h: BARH, stroke: tk.ink2, dash: true });
+          if (bw >= 26) text(bx + 7, by + BARH / 2 + 4.5, fitText(it.m + (it.unverified ? " [待核验]" : ""), bw - 11, { s: 12.5, w: 500 }), { s: 12.5, w: 500, fill: tk.ink });
         });
         y += LANEH;
       });
@@ -1156,14 +1178,14 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       var tx = X0 + (TODAY - from) / DAY * ppd;
       rect(tx - 1, chartTop + 30, 2, chartBottom - chartTop - 30, tk.today);
       rect(tx - 21, chartTop + 6, 42, 19, tk.today, 4);
-      text(tx - 14, chartTop + 20, "今天", { s: 12, w: 700, fill: tk.surface });
+      text(tx - 14, chartTop + 20, "截至", { s: 12, w: 700, fill: tk.surface });
     }
     // label column divider + frame border
     line(X0, chartTop, X0, chartBottom, tk.gridStrong, 1);
     ops.push({ k: "b", x: PAD, y: chartTop, w: LW + W, h: chartBottom - chartTop, stroke: tk.gridStrong });
 
-    text(PAD, chartBottom + 30, "每一格表示一个模型从发布到同系列下一代发布的时长；延伸到“今天”红线的是该系列当前最新版本。格子长度不代表模型已下线。", { s: 13, fill: tk.ink2 });
-    text(PAD, chartBottom + 52, "日期按公开发布或首次开放使用计，整理于 " + TODAY_STR + "。", { s: 13, fill: tk.muted });
+    text(PAD, chartBottom + 30, "每一格表示一个模型从发布到同系列下一代发布的时长；延伸到“截至”红线的是收录的最新版本。格子长度不代表模型下线。", { s: 13, fill: tk.ink2 });
+    text(PAD, chartBottom + 52, "日期按公开发布或首次开放使用计，核验截至 " + TODAY_STR + "；虚线框为待核验记录，不作为已核验版本的接替依据。", { s: 13, fill: tk.muted });
 
     return { w: Math.ceil(totalW), h: Math.ceil(totalH), ops: ops, count: count };
   }
@@ -1189,8 +1211,11 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
         if (o.y1 === o.y2) { ctx.beginPath(); ctx.moveTo(o.x1, Math.round(o.y1) + 0.5); ctx.lineTo(o.x2, Math.round(o.y2) + 0.5); }
         ctx.stroke();
       } else if (o.k === "b") {
+        ctx.save();
         ctx.strokeStyle = o.stroke; ctx.lineWidth = 1;
+        if (o.dash) ctx.setLineDash([3, 2]);
         ctx.strokeRect(Math.round(o.x) + 0.5, Math.round(o.y) + 0.5, o.w, o.h);
+        ctx.restore();
       }
     });
     return c;
@@ -1221,7 +1246,7 @@ td .tp i { width: 12px; height: 3px; border-radius: 2px; background: var(--c); d
       if (o.k === "r") out.push('<rect x="' + n(o.x) + '" y="' + n(o.y) + '" width="' + n(o.w) + '" height="' + n(o.h) + '"' + (o.r ? ' rx="' + Math.min(o.r, o.w / 2) + '"' : "") + ' fill="' + o.fill + '"/>');
       else if (o.k === "t") out.push('<text x="' + n(o.x) + '" y="' + n(o.y) + '" font-size="' + o.s + '" font-weight="' + o.w + '" font-family="' + esc(o.f === "mono" ? MONO : SANS) + '" fill="' + o.fill + '">' + esc(o.t) + "</text>");
       else if (o.k === "l") out.push('<line x1="' + n(o.x1) + '" y1="' + n(o.y1) + '" x2="' + n(o.x2) + '" y2="' + n(o.y2) + '" stroke="' + o.stroke + '" stroke-width="' + o.lw + '"/>');
-      else if (o.k === "b") out.push('<rect x="' + n(o.x) + '" y="' + n(o.y) + '" width="' + n(o.w) + '" height="' + n(o.h) + '" fill="none" stroke="' + o.stroke + '"/>');
+      else if (o.k === "b") out.push('<rect x="' + n(o.x) + '" y="' + n(o.y) + '" width="' + n(o.w) + '" height="' + n(o.h) + '" fill="none" stroke="' + o.stroke + '"' + (o.dash ? ' stroke-dasharray="3 2"' : '') + '/>');
     });
     out.push("</svg>");
     return out.join("\n");

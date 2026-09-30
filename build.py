@@ -8,6 +8,8 @@
 import argparse
 import datetime as dt
 import json
+import re
+from urllib.parse import urlsplit
 import sys
 from pathlib import Path
 
@@ -17,16 +19,20 @@ TYPES = {"flagship", "reasoning", "small", "open", "media", "code"}
 
 
 def parse_date(s):
+    if not isinstance(s, str) or not re.fullmatch(r"\d{4}-\d{2}(?:-\d{2})?", s):
+        raise ValueError("日期必须是 YYYY-MM 或 YYYY-MM-DD")
     parts = [int(p) for p in s.split("-")]
     while len(parts) < 3:
         parts.append(1)
     return dt.date(*parts)
 
 
-def load():
+def load(as_of=None):
     errors, warnings = [], []
     companies = json.loads((DATA / "companies.json").read_text(encoding="utf-8"))
-    keys = [c["key"] for c in companies]
+    keys = [c.get("key", "") for c in companies]
+    if len(keys) != len(set(keys)):
+        errors.append("companies.json: 公司 key 重复")
     for c in companies:
         for f in ("key", "name", "sub", "region", "china"):
             if f not in c:
@@ -59,6 +65,22 @@ def load():
             except (ValueError, TypeError):
                 errors.append(f"{where}: 日期格式应为 YYYY-MM-DD，实际是 {x.get('d')!r}")
                 continue
+            if as_of and d > parse_date(as_of):
+                errors.append(f"{where}: 发布日期晚于数据截至日期 {as_of}")
+            source = x.get("s")
+            if source:
+                try:
+                    url = urlsplit(source) if isinstance(source, str) else None
+                except ValueError:
+                    url = None
+                if not url or url.scheme != "https" or not url.netloc or url.username or url.password:
+                    errors.append(f"{where}: s 必须是无凭证的 HTTPS 来源链接")
+                if len(x["d"]) != 10 and x.get("verification") != "unverified":
+                    errors.append(f"{where}: 已核验来源的记录须精确到日")
+            if x.get("verification") not in (None, "unverified"):
+                errors.append(f"{where}: verification 仅支持 unverified")
+            if d.year >= 2026 and not source and x.get("verification") != "unverified":
+                errors.append(f"{where}: 2026 年及以后的记录须附来源 s 或标记待核验")
             if x.get("t") not in TYPES:
                 errors.append(f"{where}: 类型 t 必须是 {sorted(TYPES)} 之一")
             if x.get("end"):
@@ -78,8 +100,9 @@ def load():
             if len(x.get("n", "")) > 30:
                 warnings.append(f"{where}: 备注超过 30 字，提示框里会显得拥挤")
             row = {"c": k, "lane": x["lane"], "m": x["m"], "d": x["d"], "t": x["t"], "n": x.get("n", "")}
-            if x.get("end"):
-                row["end"] = x["end"]
+            for field in ("end", "s", "verification"):
+                if x.get(field):
+                    row[field] = x[field]
             models.append(row)
     return companies, models, errors, warnings
 
@@ -94,7 +117,7 @@ def main():
     as_of = args.as_of or site["asOf"]
     parse_date(as_of)
 
-    companies, models, errors, warnings = load()
+    companies, models, errors, warnings = load(as_of)
     for w in warnings:
         print("警告:", w)
     for e in errors:
@@ -106,6 +129,9 @@ def main():
     for m in models:
         counts[m["c"]] = counts.get(m["c"], 0) + 1
     print(f"{len(models)} 个模型，{len(counts)} 家公司，数据截至 {as_of}")
+    sourced = sum(bool(m.get("s")) and m.get("verification") != "unverified" for m in models)
+    unverified = sum(m.get("verification") == "unverified" for m in models)
+    print(f"{sourced} 条附核验来源，{unverified} 条待核验，其余为历史记录")
     if args.check:
         return
 
