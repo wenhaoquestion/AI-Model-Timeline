@@ -19,5 +19,10 @@
   {"lane": "MAI 图像", "m": "MAI-Image-2.5", "d": "2026-06-02", "t": "media", "n": "图生图编辑,Build 2026"},
   {"lane": "MAI 语音", "m": "MAI-Voice-1", "d": "2025-08-28", "t": "media", "n": "自研语音合成"},
   {"lane": "MAI 语音", "m": "MAI-Transcribe-1", "d": "2026-04-02", "t": "media", "n": "语音转写"},
-  {"lane": "MAI 语音", "m": "MAI-Voice-2", "d": "2026-06-02", "t": "media", "n": "15 种语言,含 Flash"}
+  {"lane": "MAI 语音", "m": "MAI-Voice-2", "d": "2026-06-02", "t": "media", "n": "15 种语言,含 Flash"},
+  {"lane": "MAI 图像", "m": "MAI-Image-2.6", "d": "2026-08-10", "t": "media", "n": "Arena 首发,文字与写实图像增强", "s": "https://microsoft.ai/news/mai-image-2-6-launches-at-no-2-on-arena-ahead-of-google-meta-and-xai/"},
+  {"lane": "MAI 语音", "m": "MAI-Transcribe-2", "d": "2026-09-03", "t": "media", "n": "60 语言转写,说话人分离与词级时间戳", "s": "https://microsoft.ai/news/mai-transcribe-2-is-the-fastest-most-accurate-and-cheapest-speech-recognition-model-in-the-world/"},
+  {"lane": "MAI 图像", "m": "MAI-Image-2.6-Flash", "d": "2026-09-04", "t": "media", "n": "低延迟图像生成与多参考图编辑", "s": "https://microsoft.ai/news/pushing-the-quality-cost-frontier-with-mai-image-2-6/"},
+  {"lane": "MAI 语音", "m": "MAI-Transcribe-2-Streaming", "d": "2026-10-01", "t": "media", "n": "60 语言实时流式语音转写", "s": "https://microsoft.ai/news/our-first-streaming-transcription-model/"},
+  {"lane": "MAI 语音", "m": "MAI-Voice-2.1 / 2.1-Flash", "d": "2026-10-01", "t": "media", "n": "23 语言语音合成,含低延迟 Flash", "s": "https://microsoft.ai/news/our-first-streaming-transcription-model/"}
 ]

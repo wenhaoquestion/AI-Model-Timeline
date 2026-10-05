@@ -37,5 +37,7 @@
   {"lane": "Veo/Omni 视频", "m": "Veo 2", "d": "2024-12-16", "t": "media", "n": "4K,物理更真实"},
   {"lane": "Veo/Omni 视频", "m": "Veo 3", "d": "2025-05-20", "t": "media", "n": "原生同步音频"},
   {"lane": "Veo/Omni 视频", "m": "Veo 3.1", "d": "2025-10-15", "t": "media", "n": "更强音频与控制"},
-  {"lane": "Veo/Omni 视频", "m": "Gemini Omni Flash", "d": "2026-05-19", "t": "media", "n": "任意输入生成视频"}
+  {"lane": "Veo/Omni 视频", "m": "Gemini Omni Flash", "d": "2026-05-19", "t": "media", "n": "任意输入生成视频"},
+  {"lane": "Gemini Flash", "m": "Gemini 3.8 Flash Cyber", "d": "2026-09-02", "t": "small", "n": "Fairwind 受限网络安全模型", "s": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"},
+  {"lane": "Gemini Pro/Ultra", "m": "Gemini 4 Argon", "d": "2026-09-30", "t": "flagship", "n": "Fairwind 受限发布,1M 输出上限", "s": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"}
 ]

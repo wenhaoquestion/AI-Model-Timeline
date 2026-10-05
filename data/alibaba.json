@@ -43,5 +43,8 @@
   {"lane": "万相 Wan/图像生成", "m": "Qwen-Image-2.0", "d": "2026-02-10", "t": "media", "n": "7B生成编辑一体"},
   {"lane": "万相 Wan/图像生成", "m": "Wan2.7", "d": "2026-04-03", "t": "media", "n": "视频全链路编辑，15秒"},
   {"lane": "万相 Wan/图像生成", "m": "Wan3.0", "d": "2026-08-24", "t": "media", "n": "30秒视频，闭源"},
-  {"lane": "万相 Wan/图像生成", "m": "Qwen-Image-2.1", "d": "2026-09-20", "t": "media", "n": "开源，支持透明通道"}
+  {"lane": "万相 Wan/图像生成", "m": "Qwen-Image-2.1", "d": "2026-09-20", "t": "media", "n": "开源，支持透明通道"},
+  {"lane": "Qwen 主线", "m": "Qwen3.8-Flash", "d": "2026-08-26", "t": "small", "n": "高效多模态，1M上下文", "s": "https://platform.qianwenai.com/docs/changelog/models"},
+  {"lane": "Qwen 主线", "m": "Qwen3.8-Max-0902", "d": "2026-09-02", "t": "flagship", "n": "Max快照升级，强化编程与Agent", "s": "https://platform.qianwenai.com/docs/changelog/models"},
+  {"lane": "多模态 VL/Omni", "m": "Qwen3.8-Omni-Flash-Realtime", "d": "2026-09-21", "t": "media", "n": "实时音视频交互 API上线", "s": "https://platform.qianwenai.com/docs/changelog/models"}
 ]
