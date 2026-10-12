@@ -11,5 +11,6 @@
   {"lane": "图像 (Titan Image, Canvas)", "m": "Titan Image Generator v2", "d": "2024-08-06", "t": "media", "n": "参考图条件控制"},
   {"lane": "图像 (Titan Image, Canvas)", "m": "Nova Canvas", "d": "2024-12-03", "t": "media", "n": "Nova 生图", "end": "2026-09-30"},
   {"lane": "视频 (Reel)", "m": "Nova Reel", "d": "2024-12-03", "t": "media", "n": "6 秒视频生成"},
-  {"lane": "视频 (Reel)", "m": "Nova Reel 1.1", "d": "2025-04-07", "t": "media", "n": "2 分钟多镜头", "end": "2026-09-30"}
+  {"lane": "视频 (Reel)", "m": "Nova Reel 1.1", "d": "2025-04-07", "t": "media", "n": "2 分钟多镜头", "end": "2026-09-30"},
+  {"lane": "语音/智能体 (Sonic, Act)", "m": "Nova 2.5 Sonic", "d": "2026-10-05", "t": "media", "n": "实时语音推理与工具调用，256K上下文", "s": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-nova-2.5-Sonic/"}
 ]

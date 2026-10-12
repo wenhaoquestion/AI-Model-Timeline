@@ -34,5 +34,6 @@
   {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Mistral OCR 3", "d": "2025-12-18", "t": "media", "n": "更小更便宜的OCR"},
   {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Voxtral Transcribe 2", "d": "2026-02-04", "t": "open", "n": "实时转写，Realtime开源"},
   {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Voxtral TTS", "d": "2026-03-23", "t": "open", "n": "开放权重语音合成"},
-  {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Mistral OCR 4", "d": "2026-06-23", "t": "media", "n": "文档智能SOTA"}
+  {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Mistral OCR 4", "d": "2026-06-23", "t": "media", "n": "文档智能SOTA"},
+  {"lane": "旗舰 Large/Medium", "m": "Mistral Large 4 (preview)", "d": "2026-10-06", "t": "flagship", "n": "多模态MoE，API公测，权重待发布", "s": "https://mistral.ai/news/mistral-large-4/"}
 ]

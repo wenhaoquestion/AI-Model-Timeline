@@ -47,5 +47,6 @@
   {"lane": "图像/视频 (DALL·E, Sora, gpt-image)", "m": "GPT Image 1.5", "d": "2025-12-16", "t": "media", "n": "新版 ChatGPT Images"},
   {"lane": "图像/视频 (DALL·E, Sora, gpt-image)", "m": "GPT Image 2", "d": "2026-04-21", "t": "media", "n": "带推理的生图"},
   {"lane": "图像/视频 (DALL·E, Sora, gpt-image)", "m": "GPT Image 2.5", "d": "2026-09-08", "t": "media", "n": "新增 Sketch 草图"},
-  {"lane": "轻量 mini/nano", "m": "GPT-6.1 Sol", "d": "2026-09-29", "t": "small", "n": "增强编程、电脑操作与专业工作", "s": "https://openai.com/index/introducing-gpt-6-1-sol/"}
+  {"lane": "轻量 mini/nano", "m": "GPT-6.1 Sol", "d": "2026-09-29", "t": "small", "n": "增强编程、电脑操作与专业工作", "s": "https://openai.com/index/introducing-gpt-6-1-sol/"},
+  {"lane": "轻量 mini/nano", "m": "GPT-6 Sol / Luna (October)", "d": "2026-10-07", "t": "small", "n": "ChatGPT 10月对话版，智能交互界面", "s": "https://deploymentsafety.openai.com/gpt-6-october"}
 ]

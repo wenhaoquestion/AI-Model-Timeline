@@ -27,5 +27,6 @@
   {"lane": "Mythos/Fable", "m": "Claude Mythos Preview", "d": "2026-04-07", "t": "flagship", "n": "限 11 家机构,Glasswing"},
   {"lane": "Mythos/Fable", "m": "Claude Fable 5 / Mythos 5", "d": "2026-06-09", "t": "flagship", "n": "Fable 公开,Mythos 受限"},
   {"lane": "Mythos/Fable", "m": "Claude Fable 5.1 / Mythos 5.1", "d": "2026-09-01", "t": "flagship", "n": "降本 25–45%"},
-  {"lane": "Sonnet", "m": "Claude Sonnet 5.5", "d": "2026-09-28", "t": "flagship", "n": "更快、更低成本的 Sonnet 5 升级", "s": "https://www.anthropic.com/claude-sonnet-5-5"}
+  {"lane": "Sonnet", "m": "Claude Sonnet 5.5", "d": "2026-09-28", "t": "flagship", "n": "更快、更低成本的 Sonnet 5 升级", "s": "https://www.anthropic.com/claude-sonnet-5-5"},
+  {"lane": "Haiku", "m": "Claude Haiku 5.5", "d": "2026-10-07", "t": "small", "n": "低成本高吞吐，支持可调思考强度", "s": "https://www.anthropic.com/claude-haiku-5-5"}
 ]
