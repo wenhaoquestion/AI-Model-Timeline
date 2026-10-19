@@ -16,5 +16,7 @@
   {"key": "tencent", "name": "腾讯", "sub": "混元 Hunyuan", "region": "CN", "china": true},
   {"key": "minimax", "name": "MiniMax", "sub": "稀宇科技 · 海螺", "region": "CN", "china": true},
   {"key": "stepfun", "name": "阶跃星辰", "sub": "StepFun · Step", "region": "CN", "china": true},
-  {"key": "iflytek", "name": "科大讯飞", "sub": "讯飞星火 Spark", "region": "CN", "china": true}
+  {"key": "iflytek", "name": "科大讯飞", "sub": "讯飞星火 Spark", "region": "CN", "china": true},
+  {"key": "nvidia", "name": "NVIDIA", "sub": "Nemotron", "region": "US", "china": false},
+  {"key": "bfl", "name": "Black Forest Labs", "sub": "FLUX", "region": "DE", "china": false}
 ]

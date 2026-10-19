@@ -23,5 +23,6 @@
   {"lane": "3D 与世界模型", "m": "HunyuanWorld 1.0", "d": "2025-07-26", "t": "open", "n": "开源3D世界生成"},
   {"lane": "3D 与世界模型", "m": "混元3D 3.0", "d": "2025-09-16", "t": "media", "n": "精度提升3倍"},
   {"lane": "3D 与世界模型", "m": "HunyuanWorld 1.5", "d": "2025-12-18", "t": "open", "n": "实时世界生成WorldPlay"},
-  {"lane": "3D 与世界模型", "m": "HY-World 2.0", "d": "2026-04-16", "t": "open", "n": "多模态3D世界模型"}
+  {"lane": "3D 与世界模型", "m": "HY-World 2.0", "d": "2026-04-16", "t": "open", "n": "多模态3D世界模型"},
+  {"lane": "记忆 Hy-Memory", "m": "Hy-Memory-30B-A3B", "d": "2026-10-16", "t": "open", "n": "Hy-Memory 2.0记忆模型，约3B激活", "s": "https://memory.hunyuan.tencent.com/"}
 ]
