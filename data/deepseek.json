@@ -29,5 +29,6 @@
   {"lane": "多模态 VL/Janus/OCR", "m": "Janus-Pro", "d": "2025-01-27", "t": "media", "n": "7B多模态理解+文生图"},
   {"lane": "多模态 VL/Janus/OCR", "m": "DeepSeek-OCR", "d": "2025-10-20", "t": "open", "n": "上下文光学压缩"},
   {"lane": "多模态 VL/Janus/OCR", "m": "DeepSeek-OCR 2", "d": "2026-01-27", "t": "open", "n": "DeepEncoder V2视觉编码"},
-  {"lane": "多模态 VL/Janus/OCR", "m": "DeepSeek-V4-Flash-Vision-Exp", "d": "2026-08-21", "t": "flagship", "n": "V4视觉实验版API", "end": "2026-09-10"}
+  {"lane": "多模态 VL/Janus/OCR", "m": "DeepSeek-V4-Flash-Vision-Exp", "d": "2026-08-21", "t": "flagship", "n": "V4视觉实验版API", "end": "2026-09-10"},
+  {"lane": "V 系列通用", "m": "DeepSeek-V4.1-Flash-1017", "d": "2026-10-17", "t": "flagship", "n": "Agent与编程增强，缩短任务耗时", "s": "https://api-docs.deepseek.com/updates/#date-2026-10-17"}
 ]

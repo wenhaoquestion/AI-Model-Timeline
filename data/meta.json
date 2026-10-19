@@ -26,5 +26,6 @@
   {"lane": "Muse 闭源 (MSL)", "m": "Muse Spark", "d": "2026-04-08", "t": "flagship", "n": "MSL 首个模型,闭源"},
   {"lane": "Muse 闭源 (MSL)", "m": "Muse Spark 1.1", "d": "2026-07-09", "t": "flagship", "n": "正式版"},
   {"lane": "Muse 闭源 (MSL)", "m": "Muse Spark 1.2", "d": "2026-08-05", "t": "flagship", "n": "驱动 Muse Code"},
-  {"lane": "Muse 闭源 (MSL)", "m": "Muse Spark 1.3", "d": "2026-09-02", "t": "reasoning", "n": "逼近前沿,1M 上下文"}
+  {"lane": "Muse 闭源 (MSL)", "m": "Muse Spark 1.3", "d": "2026-09-02", "t": "reasoning", "n": "逼近前沿,1M 上下文"},
+  {"lane": "Muse 闭源 (MSL)", "m": "Muse Wonder / Muse Wonder Full", "d": "2026-10-12", "t": "flagship", "n": "智能体旗舰，支持主动记忆与持续任务执行", "s": "https://research.meta.ai/blog/muse-wonder"}
 ]
