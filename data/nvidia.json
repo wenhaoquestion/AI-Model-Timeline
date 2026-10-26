@@ -1,4 +1,5 @@
 [
   {"lane": "Nemotron Super VL", "m": "Nemotron 3.5 Super VL", "d": "2026-10-15", "t": "open", "n": "120B开放权重，多模态智能体模型", "s": "https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/"},
-  {"lane": "Nemotron Bolt", "m": "Nemotron 3.5 Bolt 74B-A9B 24GB", "d": "2026-10-15", "t": "open", "n": "本地智能体，原生2-bit适配24GB内存", "s": "https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/"}
+  {"lane": "Nemotron Bolt", "m": "Nemotron 3.5 Bolt 74B-A9B 24GB", "d": "2026-10-15", "t": "open", "n": "本地智能体，原生2-bit适配24GB内存", "s": "https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/"},
+  {"lane": "Nemotron Bolt", "m": "Nemotron 3.5 Bolt E4B 4GB", "d": "2026-10-23", "t": "open", "n": "开放权重端侧小模型，64K上下文", "s": "https://research.nvidia.com/labs/nemotron/Nemotron-3.5-Bolt-E4B-4GB/"}
 ]

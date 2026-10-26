@@ -16,5 +16,6 @@
   {"lane": "开源研究模型", "m": "Moonlight-16B-A3B", "d": "2025-02-22", "t": "open", "n": "Muon优化器MoE"},
   {"lane": "开源研究模型", "m": "Kimi-VL", "d": "2025-04-10", "t": "open", "n": "16B MoE视觉语言"},
   {"lane": "开源研究模型", "m": "Kimi-Audio", "d": "2025-04-25", "t": "open", "n": "开源音频基座"},
-  {"lane": "开源研究模型", "m": "Kimi Linear", "d": "2025-10-30", "t": "open", "n": "48B线性注意力KDA"}
+  {"lane": "开源研究模型", "m": "Kimi Linear", "d": "2025-10-30", "t": "open", "n": "48B线性注意力KDA"},
+  {"lane": "Kimi 通用旗舰", "m": "Kimi K3.1 Pro / Highspeed", "d": "2026-10-24", "t": "flagship", "n": "1M上下文，API上线，权重预告11月4日前发布", "s": "https://www.kimi.com/en/blog/kimi-k3-1-pro"}
 ]

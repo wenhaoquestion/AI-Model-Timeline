@@ -36,5 +36,6 @@
   {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Voxtral TTS", "d": "2026-03-23", "t": "open", "n": "开放权重语音合成"},
   {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Mistral OCR 4", "d": "2026-06-23", "t": "media", "n": "文档智能SOTA"},
   {"lane": "旗舰 Large/Medium", "m": "Mistral Large 4 (preview)", "d": "2026-10-06", "t": "flagship", "n": "多模态MoE，API公测，权重待发布", "s": "https://mistral.ai/news/mistral-large-4/"},
-  {"lane": "时序预测 Timestral", "m": "Timestral (5M/28M/123M/209M)", "d": "2026-10-15", "t": "open", "n": "四尺寸时序基础模型，支持多变量概率预测", "s": "https://mistral.ai/news/timestral/"}
+  {"lane": "时序预测 Timestral", "m": "Timestral (5M/28M/123M/209M)", "d": "2026-10-15", "t": "open", "n": "四尺寸时序基础模型，支持多变量概率预测", "s": "https://mistral.ai/news/timestral/"},
+  {"lane": "多模态/语音 Pixtral·Voxtral·OCR", "m": "Voxtral 3 (Transcribe / Realtime / TTS)", "d": "2026-10-20", "t": "media", "n": "转写与语音合成新一代，API及自部署", "s": "https://mistral.ai/news/voxtral-3/"}
 ]
