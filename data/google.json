@@ -41,5 +41,6 @@
   {"lane": "Gemini Flash", "m": "Gemini 3.8 Flash Cyber", "d": "2026-09-02", "t": "small", "n": "Fairwind 受限网络安全模型", "s": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"},
   {"lane": "Gemini Pro/Ultra", "m": "Gemini 4 Argon", "d": "2026-09-30", "t": "flagship", "n": "Fairwind 受限发布,1M 输出上限", "s": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"},
   {"lane": "Imagen/Nano Banana 图像", "m": "Nano Banana 2.1", "d": "2026-10-06", "t": "media", "n": "生图编辑升级，增强一致性与文字", "s": "https://ai.google.dev/gemini-api/docs/changelog"},
-  {"lane": "Gemini Pro/Ultra", "m": "Gemini 4 Carbon", "d": "2026-10-28", "t": "flagship", "n": "长周期智能体与网络安全，Fairwind受限发布", "s": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"}
+  {"lane": "Gemini Pro/Ultra", "m": "Gemini 4 Carbon", "d": "2026-10-28", "t": "flagship", "n": "长周期智能体与网络安全，Fairwind受限发布", "s": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"},
+  {"lane": "Veo/Omni 视频", "m": "Gemini Omni 1.2 Flash", "d": "2026-11-05", "t": "media", "n": "15秒视频生成与编辑，参考一致性增强", "s": "https://cloud.google.com/blog/products/ai-machine-learning/gemini-omni-1-2-flash-generally-available"}
 ]

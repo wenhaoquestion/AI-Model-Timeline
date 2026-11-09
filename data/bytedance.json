@@ -22,5 +22,6 @@
   {"lane": "视频 Seedance", "m": "Seedance 1.0 Pro", "d": "2025-06-11", "t": "media", "n": "1080P多镜头视频"},
   {"lane": "视频 Seedance", "m": "Seedance 1.5 pro", "d": "2025-12-16", "t": "media", "n": "音画联合生成"},
   {"lane": "视频 Seedance", "m": "Seedance 2.0", "d": "2026-02-12", "t": "media", "n": "多模态参考，原生音频"},
-  {"lane": "视频 Seedance", "m": "Seedance 2.5", "d": "2026-07-31", "t": "media", "n": "30秒原生4K视频"}
+  {"lane": "视频 Seedance", "m": "Seedance 2.5", "d": "2026-07-31", "t": "media", "n": "30秒原生4K视频"},
+  {"lane": "图像 Seedream", "m": "Seedream 5.5", "d": "2026-11-09", "t": "media", "n": "原生RGBA透明图，百轮编辑与真实感提升", "s": "https://seed.bytedance.com/en/blog/more-realistic-images-more-stable-editing-across-100-rounds-introducing-seedream-5-5"}
 ]

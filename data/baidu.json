@@ -22,5 +22,6 @@
   {"lane": "图像与视频生成", "m": "iRAG", "d": "2024-11-12", "t": "media", "n": "检索增强文生图"},
   {"lane": "图像与视频生成", "m": "百度蒸汽机 MuseSteamer", "d": "2025-07-02", "t": "media", "n": "视频生成模型首发"},
   {"lane": "图像与视频生成", "m": "蒸汽机 2.0", "d": "2025-08-21", "t": "media", "n": "音视频一体化生成"},
-  {"lane": "开源与轻量", "m": "Unlimited OCR 2", "d": "2026-10-27", "t": "open", "n": "SR-SWA超长文档解析，MIT开放权重", "s": "https://github.com/baidu/Unlimited-OCR"}
+  {"lane": "开源与轻量", "m": "Unlimited OCR 2", "d": "2026-10-27", "t": "open", "n": "SR-SWA超长文档解析，MIT开放权重", "s": "https://github.com/baidu/Unlimited-OCR"},
+  {"lane": "开源与轻量", "m": "ERNIE-5.5-Flash-Base", "d": "2026-11-05", "t": "open", "n": "280B-A14B开放基座，微调/推理1M", "s": "https://ernie.baidu.com/zh/release/ernie-5-5-flash-base/"}
 ]
