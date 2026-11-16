@@ -25,5 +25,6 @@
   {"lane": "3D 与世界模型", "m": "HunyuanWorld 1.5", "d": "2025-12-18", "t": "open", "n": "实时世界生成WorldPlay"},
   {"lane": "3D 与世界模型", "m": "HY-World 2.0", "d": "2026-04-16", "t": "open", "n": "多模态3D世界模型"},
   {"lane": "记忆 Hy-Memory", "m": "Hy-Memory-30B-A3B", "d": "2026-10-16", "t": "open", "n": "Hy-Memory 2.0记忆模型，约3B激活", "s": "https://memory.hunyuan.tencent.com/"},
-  {"lane": "混元语言主线", "m": "Hy4", "d": "2026-11-04", "t": "flagship", "n": "视觉理解与电脑操作，权重预告开放", "s": "https://www.tencent.com/zh-cn/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/"}
+  {"lane": "混元语言主线", "m": "Hy4", "d": "2026-11-04", "t": "flagship", "n": "视觉理解与电脑操作，权重预告开放", "s": "https://www.tencent.com/zh-cn/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/"},
+  {"lane": "混元语言主线", "m": "Hy4 flash", "d": "2026-11-16", "t": "small", "n": "224B-A12B多模态，API上线，权重待开放", "s": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/"}
 ]

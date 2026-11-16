@@ -48,5 +48,7 @@
   {"lane": "Qwen 主线", "m": "Qwen3.8-Max-0902", "d": "2026-09-02", "t": "flagship", "n": "Max快照升级，强化编程与Agent", "s": "https://platform.qianwenai.com/docs/changelog/models"},
   {"lane": "多模态 VL/Omni", "m": "Qwen3.8-Omni-Flash-Realtime", "d": "2026-09-21", "t": "media", "n": "实时音视频交互 API上线", "s": "https://platform.qianwenai.com/docs/changelog/models"},
   {"lane": "万相 Wan/图像生成", "m": "Qwen-Image-2.1-Turbo", "d": "2026-10-09", "t": "media", "n": "开放权重，8步生成与编辑", "s": "https://github.com/QwenLM/Qwen-Image-2.1"},
-  {"lane": "多模态 VL/Omni", "m": "Qwen-Audio-3.1-Realtime-Flash", "d": "2026-10-27", "t": "media", "n": "文本音频双工实时交互，262K上下文", "s": "https://docs.qwencloud.com/changelog/models"}
+  {"lane": "多模态 VL/Omni", "m": "Qwen-Audio-3.1-Realtime-Flash", "d": "2026-10-27", "t": "media", "n": "文本音频双工实时交互，262K上下文", "s": "https://docs.qwencloud.com/changelog/models"},
+  {"lane": "Qwen 主线", "m": "Qwen4-Max-Preview", "d": "2026-11-11", "t": "flagship", "n": "多模态旗舰预览，仅Token Plan开放", "s": "https://docs.qwencloud.com/changelog/models"},
+  {"lane": "Qwen 主线", "m": "Qwen4-Max", "d": "2026-11-16", "t": "flagship", "n": "多模态旗舰，推理编程与智能体任务", "s": "https://docs.qwencloud.com/changelog/models"}
 ]
